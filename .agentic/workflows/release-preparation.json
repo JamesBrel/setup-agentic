@@ -1,0 +1,97 @@
+{
+  "id": "release-preparation",
+  "name": "Release Packaging and Deployment Certification",
+  "description": "Certify GATE-REL-005, calculate SemVer, generate CHANGELOG.md, package artifacts, and request human deployment approval.",
+  "operating_mode": "HYBRID",
+  "trigger_conditions": [
+    "Milestone completion and release freeze",
+    "User requests release packaging"
+  ],
+  "required_agents": [
+    "release-manager",
+    "cicd-engineer",
+    "qa-engineer",
+    "security-auditor"
+  ],
+  "input_artifacts": [
+    ".agentic/logs/",
+    "git_history"
+  ],
+  "execution_stages": [
+    {
+      "stage_id": "REL-01-GATE-AUDIT",
+      "name": "Verification of All Preceding Quality Gates",
+      "order": 1,
+      "agent": "release-manager",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        ".agentic/logs/"
+      ],
+      "outputs": [
+        ".agentic/logs/gate_verification_manifest.json"
+      ],
+      "quality_gate_id": null
+    },
+    {
+      "stage_id": "REL-02-SEMVER-CHANGELOG",
+      "name": "Semantic Versioning & CHANGELOG Generation",
+      "order": 2,
+      "agent": "release-manager",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        "git_history"
+      ],
+      "outputs": [
+        "CHANGELOG.md",
+        "docs/RELEASE_NOTES.md"
+      ],
+      "quality_gate_id": null
+    },
+    {
+      "stage_id": "REL-03-PACKAGING",
+      "name": "Artifact Packaging & Checksum Generation",
+      "order": 3,
+      "agent": "cicd-engineer",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        "src/"
+      ],
+      "outputs": [
+        "release_manifest.json"
+      ],
+      "quality_gate_id": "GATE-REL-005"
+    },
+    {
+      "stage_id": "REL-04-HUMAN-APPROVAL",
+      "name": "Human-in-the-Loop Deployment Authorization",
+      "order": 4,
+      "agent": "release-manager",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        "release_manifest.json"
+      ],
+      "outputs": [
+        ".agentic/logs/human_approval_status.json"
+      ],
+      "quality_gate_id": null
+    }
+  ],
+  "quality_gates": [
+    "GATE-REL-005"
+  ],
+  "failure_handling": {
+    "retry_limit": 1,
+    "fallback_action": "HALT_RELEASE_AND_ALERT_OPERATOR",
+    "escalation_target": "chief-orchestrator"
+  },
+  "completion_criteria": [
+    "All 5 Quality Gates proven with cryptographic evidence",
+    "CHANGELOG.md generated according to Keep a Changelog standard",
+    "Human deployment signoff obtained or queued"
+  ],
+  "expected_deliverables": [
+    "CHANGELOG.md",
+    "release_manifest.json",
+    "docs/RELEASE_NOTES.md"
+  ]
+}

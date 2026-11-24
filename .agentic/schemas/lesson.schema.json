@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ValidatedLessonRecord",
+  "description": "Canonical schema for an Agentic Software Factory V3 validated engineering lesson",
+  "type": "object",
+  "required": [
+    "lesson_id",
+    "timestamp",
+    "status",
+    "original_problem",
+    "technical_context",
+    "verified_root_cause",
+    "solution",
+    "regression_prevention_strategy",
+    "supporting_evidence",
+    "applicable_framework_or_version",
+    "tags"
+  ],
+  "properties": {
+    "lesson_id": { "type": "string", "pattern": "^LESSON-[0-9]{4,}$" },
+    "timestamp": { "type": "string" },
+    "status": { "type": "string", "enum": ["VALIDATED", "OBSOLETE", "SUPERSEDED"] },
+    "original_problem": { "type": "string" },
+    "technical_context": {
+      "type": "object",
+      "required": ["component", "environment", "files_affected"],
+      "properties": {
+        "component": { "type": "string" },
+        "environment": { "type": "string" },
+        "files_affected": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "verified_root_cause": { "type": "string" },
+    "solution": { "type": "string" },
+    "regression_prevention_strategy": {
+      "type": "object",
+      "required": ["automated_test_added", "policy_or_lint_rule", "description"],
+      "properties": {
+        "automated_test_added": { "type": "boolean" },
+        "policy_or_lint_rule": { "type": "string" },
+        "description": { "type": "string" }
+      }
+    },
+    "supporting_evidence": {
+      "type": "object",
+      "required": ["verification_command", "verification_output_summary", "test_passed"],
+      "properties": {
+        "verification_command": { "type": "string" },
+        "verification_output_summary": { "type": "string" },
+        "test_passed": { "type": "boolean" }
+      }
+    },
+    "applicable_framework_or_version": { "type": "string" },
+    "tags": { "type": "array", "items": { "type": "string" } }
+  },
+  "additionalProperties": false
+}

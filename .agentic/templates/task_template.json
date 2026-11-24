@@ -1,0 +1,27 @@
+{
+  "task_id": "TASK-EXAMPLE-001",
+  "workflow_id": "workflow-id",
+  "objective": "Concise summary of task objective",
+  "description": "Detailed explanation of technical implementation requirements",
+  "assigned_agent": "specialist-agent-id",
+  "dependencies": [],
+  "priority": "HIGH",
+  "allowed_paths": ["src/module/"],
+  "forbidden_paths": [".agentic/config/security_boundaries.json"],
+  "required_inputs": ["docs/TRD.md"],
+  "expected_outputs": ["src/module/component.ts", "tests/module/component.test.ts"],
+  "acceptance_criteria": [
+    "Acceptance criterion 1",
+    "Acceptance criterion 2"
+  ],
+  "verification_commands": [
+    "npm test -- tests/module/component.test.ts"
+  ],
+  "status": "PLANNED",
+  "evidence": [],
+  "retry_count": 0,
+  "max_retries": 3,
+  "risks": ["Potential edge case risk"],
+  "handoff_notes": "Ready for execution",
+  "metadata": {}
+}

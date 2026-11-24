@@ -1,0 +1,81 @@
+{
+  "id": "dependency-upgrades",
+  "name": "Automated Dependency Upgrades",
+  "description": "Safe, non-breaking upgrade of project dependencies with lockfile verification and test validation.",
+  "operating_mode": "EXISTING_PROJECT",
+  "trigger_conditions": [
+    "Scheduled weekly dependency refresh",
+    "Security vulnerability in dependency requires patch upgrade"
+  ],
+  "required_agents": [
+    "devops-engineer",
+    "qa-engineer",
+    "security-auditor"
+  ],
+  "input_artifacts": [
+    "dependency_manifests"
+  ],
+  "execution_stages": [
+    {
+      "stage_id": "DEP-01-OUTDATED-SCAN",
+      "name": "Outdated Packages & CVE Discovery",
+      "order": 1,
+      "agent": "security-auditor",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        "dependency_manifests"
+      ],
+      "outputs": [
+        ".agentic/logs/outdated_dependencies.json"
+      ],
+      "quality_gate_id": null
+    },
+    {
+      "stage_id": "DEP-02-UPGRADE-EXECUTE",
+      "name": "Lockfile Regeneration and Safe Update",
+      "order": 2,
+      "agent": "devops-engineer",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        ".agentic/logs/outdated_dependencies.json"
+      ],
+      "outputs": [
+        "package-lock.json",
+        "composer.lock",
+        "pubspec.lock"
+      ],
+      "quality_gate_id": null
+    },
+    {
+      "stage_id": "DEP-03-BUILD-TEST",
+      "name": "Build & Test Verification",
+      "order": 3,
+      "agent": "qa-engineer",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        "package-lock.json"
+      ],
+      "outputs": [
+        ".agentic/logs/dependency_test_run.log"
+      ],
+      "quality_gate_id": "GATE-CODE-003"
+    }
+  ],
+  "quality_gates": [
+    "GATE-CODE-003"
+  ],
+  "failure_handling": {
+    "retry_limit": 2,
+    "fallback_action": "REVERT_LOCKFILE_CHANGES",
+    "escalation_target": "devops-engineer"
+  },
+  "completion_criteria": [
+    "Lockfiles regenerated with compatible versions",
+    "Full test suite passes green",
+    "Zero new vulnerabilities introduced"
+  ],
+  "expected_deliverables": [
+    "Updated lockfiles",
+    ".agentic/logs/dependency_test_run.log"
+  ]
+}

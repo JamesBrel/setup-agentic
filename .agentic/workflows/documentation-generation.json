@@ -1,0 +1,80 @@
+{
+  "id": "documentation-generation",
+  "name": "Continuous Documentation Generation",
+  "description": "Automated generation, synchronization, and link verification of developer guides and API docs.",
+  "operating_mode": "HYBRID",
+  "trigger_conditions": [
+    "API or architecture change completed",
+    "Pre-release documentation synchronization"
+  ],
+  "required_agents": [
+    "documentation-engineer",
+    "api-architect"
+  ],
+  "input_artifacts": [
+    "src/",
+    "docs/TRD.md"
+  ],
+  "execution_stages": [
+    {
+      "stage_id": "DOC-01-API-GEN",
+      "name": "API Reference Generation from OpenAPI Spec",
+      "order": 1,
+      "agent": "api-architect",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        "docs/openapi.yaml"
+      ],
+      "outputs": [
+        "docs/API_DOCUMENTATION.md"
+      ],
+      "quality_gate_id": null
+    },
+    {
+      "stage_id": "DOC-02-DEV-GUIDE",
+      "name": "Developer Guide & Setup Instructions",
+      "order": 2,
+      "agent": "documentation-engineer",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        "src/"
+      ],
+      "outputs": [
+        "docs/DEVELOPER_GUIDE.md",
+        "README.md"
+      ],
+      "quality_gate_id": null
+    },
+    {
+      "stage_id": "DOC-03-LINK-CHECK",
+      "name": "Markdown Linting and Link Verification",
+      "order": 3,
+      "agent": "documentation-engineer",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        "docs/",
+        "README.md"
+      ],
+      "outputs": [
+        ".agentic/logs/doc_lint_results.log"
+      ],
+      "quality_gate_id": null
+    }
+  ],
+  "quality_gates": [],
+  "failure_handling": {
+    "retry_limit": 2,
+    "fallback_action": "REPAIR_BROKEN_LINKS",
+    "escalation_target": "documentation-engineer"
+  },
+  "completion_criteria": [
+    "Zero broken internal links",
+    "All documented commands verified executable",
+    "Documentation matches current code release tag"
+  ],
+  "expected_deliverables": [
+    "docs/DEVELOPER_GUIDE.md",
+    "docs/API_DOCUMENTATION.md",
+    "README.md"
+  ]
+}

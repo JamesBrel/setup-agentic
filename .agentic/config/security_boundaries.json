@@ -1,0 +1,106 @@
+{
+  "policy_name": "Agentic Factory Security Boundaries Policy",
+  "version": "4.0.0",
+  "autonomous_allowed_operations": [
+    {
+      "operation": "READ_WORKSPACE_FILES",
+      "scope": "Local workspace (app/, docs/, .agentic/)",
+      "reversible": true,
+      "requires_approval": false
+    },
+    {
+      "operation": "WRITE_APP_CODE",
+      "scope": "Strictly limited to the app/ directory for all code development and implementation",
+      "reversible": true,
+      "requires_approval": false
+    },
+    {
+      "operation": "WRITE_DESIGN_AND_DOCS",
+      "scope": "Strictly limited to the docs/ directory for mockups, Stitch/Figma designs, logos, icons, PRD, and TRD",
+      "reversible": true,
+      "requires_approval": false
+    },
+    {
+      "operation": "WRITE_FACTORY_SPECIFICATIONS",
+      "scope": "Strictly inside .agentic/ for factory governance, policies, and templates",
+      "reversible": true,
+      "requires_approval": false
+    },
+    {
+      "operation": "EXECUTE_LOCAL_COMMAND",
+      "scope": "Local build, static analysis, unit tests, integration tests executed inside app/ context",
+      "reversible": true,
+      "requires_approval": false
+    },
+    {
+      "operation": "DESIGN_MCP_OPERATIONS",
+      "scope": "Execution of Stitch MCP and Figma MCP tools producing assets strictly inside docs/",
+      "reversible": true,
+      "requires_approval": false
+    },
+    {
+      "operation": "MEMORY_LESSON_CAPTURE",
+      "scope": "Validated, scrubbed lessons inside .agentic/memory/",
+      "reversible": true,
+      "requires_approval": false
+    }
+  ],
+  "strictly_prohibited_without_approval": [
+    {
+      "operation": "WRITE_CODE_OUTSIDE_APP_DIR",
+      "pattern": ["write outside app/", "modify root code"],
+      "risk_level": "CRITICAL",
+      "requires_approval": true
+    },
+    {
+      "operation": "WRITE_DESIGN_OUTSIDE_DOCS_DIR",
+      "pattern": ["write mockups in root", "write design in app/"],
+      "risk_level": "HIGH",
+      "requires_approval": true
+    },
+    {
+      "operation": "DELETE_DATABASE_DATA",
+      "pattern": ["DROP TABLE", "TRUNCATE", "DROP DATABASE", "rm -rf /", "git reset --hard"],
+      "risk_level": "CRITICAL",
+      "requires_approval": true
+    },
+    {
+      "operation": "REMOTE_GIT_PUSH",
+      "pattern": ["git push"],
+      "risk_level": "HIGH",
+      "requires_approval": true
+    },
+    {
+      "operation": "DEPLOY_TO_PRODUCTION",
+      "pattern": ["deploy", "kubectl apply -n prod", "terraform apply"],
+      "risk_level": "CRITICAL",
+      "requires_approval": true
+    },
+    {
+      "operation": "PROVISION_PAID_CLOUD_RESOURCES",
+      "pattern": ["aws", "gcloud", "az", "billing"],
+      "risk_level": "CRITICAL",
+      "requires_approval": true
+    },
+    {
+      "operation": "ACCESS_PRODUCTION_CREDENTIALS",
+      "pattern": [".env.production", "id_rsa", "aws_secret_access_key"],
+      "risk_level": "CRITICAL",
+      "requires_approval": true
+    },
+    {
+      "operation": "MODIFY_SECURITY_CONTROLS",
+      "pattern": ["disable_auth", "bypass_ssl", "skip_verification"],
+      "risk_level": "CRITICAL",
+      "requires_approval": true
+    }
+  ],
+  "forbidden_invariants": [
+    "All application code and implementation must reside exclusively inside app/",
+    "All design assets, mockups (Stitch/Figma), logos, icons, and specifications must reside exclusively inside docs/",
+    "Never bypass platform approval mechanisms",
+    "Never expose credentials, tokens, or private secrets in logs, artifacts, or code",
+    "Never disable security controls to make tests pass",
+    "Never overwrite user uncommitted work in brownfield projects"
+  ]
+}

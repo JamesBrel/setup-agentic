@@ -1,0 +1,61 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "QualityGateDefinition",
+  "description": "Canonical schema for an Agentic Software Factory V3 Quality Gate",
+  "type": "object",
+  "required": [
+    "gate_id",
+    "name",
+    "stage",
+    "description",
+    "enforcing_agents",
+    "blocking",
+    "checks",
+    "pass_criteria",
+    "failure_action"
+  ],
+  "properties": {
+    "gate_id": { "type": "string", "pattern": "^GATE-[A-Z0-9-]+$" },
+    "name": { "type": "string" },
+    "stage": { "type": "string" },
+    "description": { "type": "string" },
+    "enforcing_agents": { "type": "array", "items": { "type": "string" } },
+    "blocking": { "type": "boolean" },
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["check_id", "name", "category", "evaluation_method", "required_result"],
+        "properties": {
+          "check_id": { "type": "string" },
+          "name": { "type": "string" },
+          "category": {
+            "type": "string",
+            "enum": [
+              "REQUIREMENTS_VALIDATION",
+              "ARCHITECTURE_VALIDATION",
+              "STATIC_ANALYSIS",
+              "TYPE_CHECKING",
+              "UNIT_TESTING",
+              "INTEGRATION_TESTING",
+              "E2E_TESTING",
+              "API_CONTRACT",
+              "SECURITY_AUDIT",
+              "DEPENDENCY_AUDIT",
+              "PERFORMANCE_TEST",
+              "ACCESSIBILITY_AUDIT",
+              "BUILD_VERIFICATION",
+              "DOCUMENTATION_VERIFICATION"
+            ]
+          },
+          "evaluation_method": { "type": "string" },
+          "command": { "type": "string" },
+          "required_result": { "type": "string" }
+        }
+      }
+    },
+    "pass_criteria": { "type": "string" },
+    "failure_action": { "type": "string", "enum": ["RETRY_LOCAL", "REASSIGN", "ESCALATE_TO_ORCHESTRATOR", "BLOCK_WORKFLOW"] }
+  },
+  "additionalProperties": false
+}

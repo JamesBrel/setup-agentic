@@ -1,0 +1,114 @@
+{
+  "id": "feature-development",
+  "name": "Targeted Feature Development",
+  "description": "Scoped feature addition adhering to existing architectural invariants and contracts.",
+  "operating_mode": "HYBRID",
+  "trigger_conditions": [
+    "User requests new feature in greenfield or brownfield project",
+    "Command: /add-new-features or !add-new-features"
+  ],
+  "required_agents": [
+    "requirements-engineer",
+    "task-planning",
+    "agent-coordination",
+    "backend-developer",
+    "frontend-developer",
+    "unit-testing",
+    "code-reviewer",
+    "qa-engineer"
+  ],
+  "input_artifacts": [
+    "feature_request.md",
+    ".agentic/memory/project_profile.json"
+  ],
+  "execution_stages": [
+    {
+      "stage_id": "FEAT-01-REQUIREMENTS",
+      "name": "Feature Acceptance Criteria Definition",
+      "order": 1,
+      "agent": "requirements-engineer",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        "feature_request.md"
+      ],
+      "outputs": [
+        "feature_spec.json"
+      ],
+      "quality_gate_id": null
+    },
+    {
+      "stage_id": "FEAT-02-TASK-PLANNING",
+      "name": "Task Plan & Path Boundary Definition",
+      "order": 2,
+      "agent": "task-planning",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        "feature_spec.json"
+      ],
+      "outputs": [
+        ".agentic/orchestration/feature_tasks.json"
+      ],
+      "quality_gate_id": null
+    },
+    {
+      "stage_id": "FEAT-03-DEV",
+      "name": "Scoped Feature Implementation",
+      "order": 3,
+      "agent": "backend-developer",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        ".agentic/orchestration/feature_tasks.json"
+      ],
+      "outputs": [
+        "src/"
+      ],
+      "quality_gate_id": null
+    },
+    {
+      "stage_id": "FEAT-04-UNIT-TESTS",
+      "name": "Unit & Integration Test Addition",
+      "order": 4,
+      "agent": "unit-testing",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        "src/"
+      ],
+      "outputs": [
+        "tests/"
+      ],
+      "quality_gate_id": "GATE-CODE-003"
+    },
+    {
+      "stage_id": "FEAT-05-CODE-REVIEW",
+      "name": "Code Review and Invariant Check",
+      "order": 5,
+      "agent": "code-reviewer",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        "git_diff"
+      ],
+      "outputs": [
+        ".agentic/logs/feature_review.json"
+      ],
+      "quality_gate_id": null
+    }
+  ],
+  "quality_gates": [
+    "GATE-CODE-003"
+  ],
+  "failure_handling": {
+    "retry_limit": 3,
+    "fallback_action": "REVERT_DIFF_AND_REPLAN",
+    "escalation_target": "task-planning"
+  },
+  "completion_criteria": [
+    "All new acceptance criteria satisfied with 100% passing tests",
+    "Zero regressions in existing test suite",
+    "Code review approved"
+  ],
+  "expected_deliverables": [
+    "src/ modified files",
+    "tests/ new test cases",
+    ".agentic/logs/feature_review.json"
+  ]
+}

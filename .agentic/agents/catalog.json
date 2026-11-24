@@ -1,0 +1,397 @@
+{
+  "total_agents": 47,
+  "divisions": {
+    "management": [
+      "agent-coordination",
+      "chief-orchestrator",
+      "project-manager",
+      "task-planning",
+      "workflow-manager"
+    ],
+    "product": [
+      "business-analyst",
+      "prd-architect",
+      "product-strategist",
+      "requirements-engineer",
+      "trd-architect"
+    ],
+    "architecture": [
+      "api-architect",
+      "backend-architect",
+      "database-architect",
+      "desktop-architect",
+      "frontend-architect",
+      "mobile-architect",
+      "principal-software-architect",
+      "project_designer",
+      "ui-ux-designer"
+    ],
+    "development": [
+      "backend-developer",
+      "database-engineer",
+      "desktop-developer",
+      "flutter-developer",
+      "frontend-developer",
+      "integration-engineer",
+      "laravel-developer",
+      "nodejs-developer",
+      "react-developer"
+    ],
+    "quality": [
+      "accessibility-auditor",
+      "code-reviewer",
+      "e2e-testing",
+      "integration-testing",
+      "performance-engineer",
+      "qa-engineer",
+      "security-architect",
+      "security-auditor",
+      "unit-testing"
+    ],
+    "infrastructure": [
+      "cicd-engineer",
+      "cloud-architect",
+      "devops-engineer",
+      "documentation-engineer",
+      "release-manager"
+    ],
+    "intelligence": [
+      "factory-auditor",
+      "knowledge-manager",
+      "learning-improvement",
+      "memory-curator",
+      "technical-research"
+    ]
+  },
+  "agents": {
+    "accessibility-auditor": {
+      "name": "Accessibility Auditor Agent",
+      "role": "WCAG 2.1 AA/AAA Compliance and Usability Verification",
+      "division": "quality",
+      "model_tier": "tier_fast",
+      "file": ".agentic/agents/accessibility-auditor.json"
+    },
+    "agent-coordination": {
+      "name": "Agent Coordination Agent",
+      "role": "Task Dispatcher and Concurrency Arbiter",
+      "division": "management",
+      "model_tier": "tier_fast",
+      "file": ".agentic/agents/agent-coordination.json"
+    },
+    "api-architect": {
+      "name": "API Architect Agent",
+      "role": "API Contract Engineering (REST, GraphQL, gRPC)",
+      "division": "architecture",
+      "model_tier": "tier_reasoning",
+      "file": ".agentic/agents/api-architect.json"
+    },
+    "backend-architect": {
+      "name": "Backend Architect Agent",
+      "role": "Backend Services, Microservices, and Business Logic Architecture",
+      "division": "architecture",
+      "model_tier": "tier_reasoning",
+      "file": ".agentic/agents/backend-architect.json"
+    },
+    "backend-developer": {
+      "name": "Backend Developer Agent",
+      "role": "Server-Side Service and Business Logic Implementation",
+      "division": "development",
+      "model_tier": "tier_standard",
+      "file": ".agentic/agents/backend-developer.json"
+    },
+    "business-analyst": {
+      "name": "Business Analyst Agent",
+      "role": "Business Process Modeling and Domain Analysis",
+      "division": "product",
+      "model_tier": "tier_reasoning",
+      "file": ".agentic/agents/business-analyst.json"
+    },
+    "chief-orchestrator": {
+      "name": "Chief Orchestrator Agent",
+      "role": "Global Factory Orchestration and Lifecycle Governance",
+      "division": "management",
+      "model_tier": "tier_reasoning",
+      "file": ".agentic/agents/chief-orchestrator.json"
+    },
+    "cicd-engineer": {
+      "name": "CI/CD Engineer Agent",
+      "role": "Continuous Integration and Deployment Pipeline Automation",
+      "division": "infrastructure",
+      "model_tier": "tier_standard",
+      "file": ".agentic/agents/cicd-engineer.json"
+    },
+    "cloud-architect": {
+      "name": "Cloud Architect Agent",
+      "role": "Cloud Architecture, Topology Design, and Cost Estimation",
+      "division": "infrastructure",
+      "model_tier": "tier_reasoning",
+      "file": ".agentic/agents/cloud-architect.json"
+    },
+    "code-reviewer": {
+      "name": "Code Reviewer Agent",
+      "role": "Static Analysis, Code Quality, and Pattern Compliance",
+      "division": "quality",
+      "model_tier": "tier_reasoning",
+      "file": ".agentic/agents/code-reviewer.json"
+    },
+    "database-architect": {
+      "name": "Database Architect Agent",
+      "role": "Data Modeling, Schema Design, and Query Optimization",
+      "division": "architecture",
+      "model_tier": "tier_reasoning",
+      "file": ".agentic/agents/database-architect.json"
+    },
+    "database-engineer": {
+      "name": "Database Engineer Agent",
+      "role": "Database DDL Implementation, Migrations and Seeding",
+      "division": "development",
+      "model_tier": "tier_standard",
+      "file": ".agentic/agents/database-engineer.json"
+    },
+    "desktop-architect": {
+      "name": "Desktop Architect Agent",
+      "role": "Desktop Application Architecture (Electron, Flutter Desktop, Tauri)",
+      "division": "architecture",
+      "model_tier": "tier_reasoning",
+      "file": ".agentic/agents/desktop-architect.json"
+    },
+    "desktop-developer": {
+      "name": "Desktop Developer Agent",
+      "role": "Native & Cross-Platform Desktop Development",
+      "division": "development",
+      "model_tier": "tier_standard",
+      "file": ".agentic/agents/desktop-developer.json"
+    },
+    "devops-engineer": {
+      "name": "DevOps Engineer Agent",
+      "role": "Containerization, Infrastructure as Code, and Environment Provisioning",
+      "division": "infrastructure",
+      "model_tier": "tier_standard",
+      "file": ".agentic/agents/devops-engineer.json"
+    },
+    "documentation-engineer": {
+      "name": "Documentation Engineer Agent",
+      "role": "Technical Documentation, API Guides, and Developer Portals",
+      "division": "infrastructure",
+      "model_tier": "tier_fast",
+      "file": ".agentic/agents/documentation-engineer.json"
+    },
+    "e2e-testing": {
+      "name": "E2E Testing Agent",
+      "role": "End-to-End User Journey Automation (Playwright, Cypress, Patrol)",
+      "division": "quality",
+      "model_tier": "tier_standard",
+      "file": ".agentic/agents/e2e-testing.json"
+    },
+    "factory-auditor": {
+      "name": "Factory Auditor Agent",
+      "role": "Factory Self-Audit, Structural Integrity, and Performance Metrology",
+      "division": "intelligence",
+      "model_tier": "tier_reasoning",
+      "file": ".agentic/agents/factory-auditor.json"
+    },
+    "flutter-developer": {
+      "name": "Flutter Developer Agent",
+      "role": "Cross-Platform Mobile and Flutter Implementation",
+      "division": "development",
+      "model_tier": "tier_standard",
+      "file": ".agentic/agents/flutter-developer.json"
+    },
+    "frontend-architect": {
+      "name": "Frontend Architect Agent",
+      "role": "Web and Client-Side State Architecture",
+      "division": "architecture",
+      "model_tier": "tier_reasoning",
+      "file": ".agentic/agents/frontend-architect.json"
+    },
+    "frontend-developer": {
+      "name": "Frontend Developer Agent",
+      "role": "Web Client Component Implementation",
+      "division": "development",
+      "model_tier": "tier_standard",
+      "file": ".agentic/agents/frontend-developer.json"
+    },
+    "integration-engineer": {
+      "name": "Integration Engineer Agent",
+      "role": "Subsystem Binding, Third-Party SDKs, and End-to-End Wiring",
+      "division": "development",
+      "model_tier": "tier_standard",
+      "file": ".agentic/agents/integration-engineer.json"
+    },
+    "integration-testing": {
+      "name": "Integration Testing Agent",
+      "role": "Service Integration and API Contract Verification",
+      "division": "quality",
+      "model_tier": "tier_standard",
+      "file": ".agentic/agents/integration-testing.json"
+    },
+    "knowledge-manager": {
+      "name": "Knowledge Manager Agent",
+      "role": "Validated Engineering Knowledge Capture and Indexing",
+      "division": "intelligence",
+      "model_tier": "tier_reasoning",
+      "file": ".agentic/agents/knowledge-manager.json"
+    },
+    "laravel-developer": {
+      "name": "Laravel Developer Agent",
+      "role": "Laravel & PHP Enterprise Development",
+      "division": "development",
+      "model_tier": "tier_standard",
+      "file": ".agentic/agents/laravel-developer.json"
+    },
+    "learning-improvement": {
+      "name": "Learning and Improvement Agent",
+      "role": "Failure Post-Mortems, Skill Evolution, and Root Cause Learning",
+      "division": "intelligence",
+      "model_tier": "tier_reasoning",
+      "file": ".agentic/agents/learning-improvement.json"
+    },
+    "memory-curator": {
+      "name": "Memory Curator Agent",
+      "role": "Memory Sanitization, Deduplication, and Lifecycle Pruning",
+      "division": "intelligence",
+      "model_tier": "tier_fast",
+      "file": ".agentic/agents/memory-curator.json"
+    },
+    "mobile-architect": {
+      "name": "Mobile Architect Agent",
+      "role": "Cross-Platform and Native Mobile Architecture",
+      "division": "architecture",
+      "model_tier": "tier_reasoning",
+      "file": ".agentic/agents/mobile-architect.json"
+    },
+    "nodejs-developer": {
+      "name": "Node.js Developer Agent",
+      "role": "Node.js & TypeScript Backend Engineering",
+      "division": "development",
+      "model_tier": "tier_standard",
+      "file": ".agentic/agents/nodejs-developer.json"
+    },
+    "performance-engineer": {
+      "name": "Performance Engineer Agent",
+      "role": "Benchmarking, Profiling, Latency, and Memory Optimization",
+      "division": "quality",
+      "model_tier": "tier_standard",
+      "file": ".agentic/agents/performance-engineer.json"
+    },
+    "prd-architect": {
+      "name": "PRD Architect Agent",
+      "role": "Product Requirements Document Authoring and Validation",
+      "division": "product",
+      "model_tier": "tier_reasoning",
+      "file": ".agentic/agents/prd-architect.json"
+    },
+    "principal-software-architect": {
+      "name": "Principal Software Architect Agent",
+      "role": "System Architecture, Design Patterns and Technical Governance",
+      "division": "architecture",
+      "model_tier": "tier_reasoning",
+      "file": ".agentic/agents/principal-software-architect.json"
+    },
+    "product-strategist": {
+      "name": "Product Strategist Agent",
+      "role": "Strategic Product Vision and Value Proposition",
+      "division": "product",
+      "model_tier": "tier_reasoning",
+      "file": ".agentic/agents/product-strategist.json"
+    },
+    "project-manager": {
+      "name": "Project Manager Agent",
+      "role": "Milestone, Resource and Delivery Tracking",
+      "division": "management",
+      "model_tier": "tier_fast",
+      "file": ".agentic/agents/project-manager.json"
+    },
+    "project_designer": {
+      "name": "Project Designer Agent",
+      "role": "UI/UX Architecture, Design System & Graphic Design (Stitch / Figma)",
+      "division": "architecture",
+      "model_tier": "tier_reasoning",
+      "file": ".agentic/agents/project_designer.json"
+    },
+    "qa-engineer": {
+      "name": "QA Engineer Agent",
+      "role": "Master Quality Assurance and Test Strategy Lead",
+      "division": "quality",
+      "model_tier": "tier_reasoning",
+      "file": ".agentic/agents/qa-engineer.json"
+    },
+    "react-developer": {
+      "name": "React Developer Agent",
+      "role": "React & TypeScript Specialist Implementation",
+      "division": "development",
+      "model_tier": "tier_standard",
+      "file": ".agentic/agents/react-developer.json"
+    },
+    "release-manager": {
+      "name": "Release Manager Agent",
+      "role": "Release Packaging, Semantic Versioning, and Deployment Certification",
+      "division": "infrastructure",
+      "model_tier": "tier_reasoning",
+      "file": ".agentic/agents/release-manager.json"
+    },
+    "requirements-engineer": {
+      "name": "Requirements Engineer Agent",
+      "role": "Specification of Functional and Non-Functional Requirements",
+      "division": "product",
+      "model_tier": "tier_reasoning",
+      "file": ".agentic/agents/requirements-engineer.json"
+    },
+    "security-architect": {
+      "name": "Security Architect Agent",
+      "role": "Threat Modeling, Security Architecture, and Cryptographic Standards",
+      "division": "quality",
+      "model_tier": "tier_reasoning",
+      "file": ".agentic/agents/security-architect.json"
+    },
+    "security-auditor": {
+      "name": "Security Auditor Agent",
+      "role": "Vulnerability Scanning, SAST, DAST, and Secret Leak Detection",
+      "division": "quality",
+      "model_tier": "tier_reasoning",
+      "file": ".agentic/agents/security-auditor.json"
+    },
+    "task-planning": {
+      "name": "Task Planning Agent",
+      "role": "Task Decomposition and Dependency Graph Construction",
+      "division": "management",
+      "model_tier": "tier_reasoning",
+      "file": ".agentic/agents/task-planning.json"
+    },
+    "technical-research": {
+      "name": "Technical Research Agent",
+      "role": "Technology Feasibility, Library Evaluation, and Proof-of-Concepts",
+      "division": "intelligence",
+      "model_tier": "tier_reasoning",
+      "file": ".agentic/agents/technical-research.json"
+    },
+    "trd-architect": {
+      "name": "TRD Architect Agent",
+      "role": "Technical Requirements Document Authoring and Traceability Mapping",
+      "division": "product",
+      "model_tier": "tier_reasoning",
+      "file": ".agentic/agents/trd-architect.json"
+    },
+    "ui-ux-designer": {
+      "name": "UI/UX Designer Agent",
+      "role": "Design Systems, User Journeys, and Accessibility Specifications",
+      "division": "architecture",
+      "model_tier": "tier_reasoning",
+      "file": ".agentic/agents/ui-ux-designer.json"
+    },
+    "unit-testing": {
+      "name": "Unit Testing Agent",
+      "role": "Unit Test Suite Engineering and Mocking",
+      "division": "quality",
+      "model_tier": "tier_standard",
+      "file": ".agentic/agents/unit-testing.json"
+    },
+    "workflow-manager": {
+      "name": "Workflow Manager Agent",
+      "role": "Workflow Pipeline Lifecycle and Transition Guardian",
+      "division": "management",
+      "model_tier": "tier_reasoning",
+      "file": ".agentic/agents/workflow-manager.json"
+    }
+  }
+}

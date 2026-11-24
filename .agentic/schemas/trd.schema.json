@@ -1,0 +1,130 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TechnicalRequirementsDocument",
+  "description": "Canonical schema for an Agentic Software Factory V3 TRD",
+  "type": "object",
+  "required": [
+    "document_id",
+    "prd_reference",
+    "architecture_pattern",
+    "technology_stack",
+    "data_architecture",
+    "api_specifications",
+    "security_architecture",
+    "infrastructure_and_deployment",
+    "testing_strategy",
+    "traceability_matrix",
+    "signoff"
+  ],
+  "properties": {
+    "document_id": { "type": "string" },
+    "prd_reference": { "type": "string" },
+    "version": { "type": "string" },
+    "status": { "type": "string", "enum": ["DRAFT", "UNDER_REVIEW", "APPROVED", "SUPERSEDED"] },
+    "architecture_pattern": {
+      "type": "object",
+      "required": ["pattern_name", "rationale", "layer_descriptions"],
+      "properties": {
+        "pattern_name": { "type": "string" },
+        "rationale": { "type": "string" },
+        "layer_descriptions": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "technology_stack": {
+      "type": "object",
+      "required": ["frontend", "backend", "database", "runtime"],
+      "properties": {
+        "frontend": { "type": "string" },
+        "backend": { "type": "string" },
+        "database": { "type": "string" },
+        "runtime": { "type": "string" },
+        "libraries": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "data_architecture": {
+      "type": "object",
+      "required": ["schema_type", "entities", "migration_plan"],
+      "properties": {
+        "schema_type": { "type": "string" },
+        "entities": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "fields"],
+            "properties": {
+              "name": { "type": "string" },
+              "fields": { "type": "array", "items": { "type": "string" } },
+              "relations": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        },
+        "migration_plan": { "type": "string" }
+      }
+    },
+    "api_specifications": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["endpoint", "method", "description", "request_format", "response_format"],
+        "properties": {
+          "endpoint": { "type": "string" },
+          "method": { "type": "string", "enum": ["GET", "POST", "PUT", "PATCH", "DELETE"] },
+          "description": { "type": "string" },
+          "auth_required": { "type": "boolean" },
+          "request_format": { "type": "string" },
+          "response_format": { "type": "string" }
+        }
+      }
+    },
+    "security_architecture": {
+      "type": "object",
+      "required": ["authentication", "authorization", "data_protection", "threat_model"],
+      "properties": {
+        "authentication": { "type": "string" },
+        "authorization": { "type": "string" },
+        "data_protection": { "type": "string" },
+        "threat_model": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "infrastructure_and_deployment": {
+      "type": "object",
+      "required": ["ci_cd", "target_environment", "observability"],
+      "properties": {
+        "ci_cd": { "type": "string" },
+        "target_environment": { "type": "string" },
+        "observability": { "type": "string" }
+      }
+    },
+    "testing_strategy": {
+      "type": "object",
+      "required": ["unit_coverage_target", "integration_plan", "e2e_plan"],
+      "properties": {
+        "unit_coverage_target": { "type": "string" },
+        "integration_plan": { "type": "string" },
+        "e2e_plan": { "type": "string" }
+      }
+    },
+    "traceability_matrix": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["req_id", "technical_component", "verification_method"],
+        "properties": {
+          "req_id": { "type": "string" },
+          "technical_component": { "type": "string" },
+          "verification_method": { "type": "string" }
+        }
+      }
+    },
+    "signoff": {
+      "type": "object",
+      "required": ["approved_by", "approval_date", "evidence"],
+      "properties": {
+        "approved_by": { "type": "string" },
+        "approval_date": { "type": "string" },
+        "evidence": { "type": "string" }
+      }
+    }
+  },
+  "additionalProperties": false
+}

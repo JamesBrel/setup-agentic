@@ -1,0 +1,17 @@
+{
+  "pattern_id": "PAT-001",
+  "name": "Generic Repository Pattern with Unit of Work",
+  "category": "data_access",
+  "description": "Decouples business logic from persistence technologies by mediating between domain entities and mapping layers.",
+  "structure": {
+    "interface": "IRepository<T, ID>",
+    "methods": ["get_by_id", "list", "add", "update", "delete"],
+    "unit_of_work": "IUnitOfWork with commit() and rollback()"
+  },
+  "benefits": [
+    "Testability via in-memory mock repositories",
+    "Single source of truth for query filtering and pagination",
+    "Enables zero-downtime database engine migrations"
+  ],
+  "verification": "Domain tests use InMemoryRepository without requiring live database container."
+}

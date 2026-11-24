@@ -1,0 +1,25 @@
+{
+  "lesson_id": "LESSON-0001",
+  "timestamp": "2026-11-16T03:00:00Z",
+  "status": "VALIDATED",
+  "original_problem": "N+1 query execution during relational list fetching caused severe latency spikes (> 1500ms).",
+  "technical_context": {
+    "component": "data_access_layer",
+    "environment": "backend_api",
+    "files_affected": ["src/infrastructure/repositories/user_repository.py"]
+  },
+  "verified_root_cause": "Child relationship entities were lazily evaluated in a loop instead of performing eager JOIN fetching.",
+  "solution": "Refactored repository query to use eager joined loading (joinedload / select_related) in a single round-trip.",
+  "regression_prevention_strategy": {
+    "automated_test_added": true,
+    "policy_or_lint_rule": "query_counter_assertion",
+    "description": "Added test asserting total SQL query count is exactly 1 when fetching collection of 100 entities."
+  },
+  "supporting_evidence": {
+    "verification_command": "pytest tests/integration/test_user_queries.py",
+    "verification_output_summary": "Passed. Query count verified <= 1. Latency reduced from 1540ms to 42ms.",
+    "test_passed": true
+  },
+  "applicable_framework_or_version": "SQLAlchemy >= 2.0 / Django >= 4.2 / Eloquent >= 10.0",
+  "tags": ["database", "performance", "n_plus_one", "orm"]
+}

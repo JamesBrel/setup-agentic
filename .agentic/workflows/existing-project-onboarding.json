@@ -1,0 +1,124 @@
+{
+  "id": "existing-project-onboarding",
+  "name": "Existing Project Onboarding (Mode B Intelligence)",
+  "description": "Comprehensive autonomous repository discovery, architectural profiling, test baselining, and user diff preservation.",
+  "operating_mode": "EXISTING_PROJECT",
+  "trigger_conditions": [
+    "User points factory to an existing software repository",
+    "Command: /adopt-project or !adopt-project",
+    "CLI invocation: run_workflow.py --workflow existing-project-onboarding"
+  ],
+  "required_agents": [
+    "chief-orchestrator",
+    "principal-software-architect",
+    "technical-research",
+    "qa-engineer",
+    "security-auditor",
+    "knowledge-manager"
+  ],
+  "input_artifacts": [
+    "workspace_root"
+  ],
+  "execution_stages": [
+    {
+      "stage_id": "ONBOARD-01-GIT-STATUS",
+      "name": "Git Status & User Diff Preservation",
+      "order": 1,
+      "agent": "chief-orchestrator",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        "workspace_root"
+      ],
+      "outputs": [
+        ".agentic/memory/user_uncommitted_diff.patch"
+      ],
+      "quality_gate_id": null
+    },
+    {
+      "stage_id": "ONBOARD-02-STRUCTURE-SCAN",
+      "name": "Repository Tree & Dependency Discovery",
+      "order": 2,
+      "agent": "technical-research",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        "workspace_root"
+      ],
+      "outputs": [
+        ".agentic/memory/raw_repo_inventory.json"
+      ],
+      "quality_gate_id": null
+    },
+    {
+      "stage_id": "ONBOARD-03-ARCH-PROFILING",
+      "name": "Architectural Pattern & Entry Point Mapping",
+      "order": 3,
+      "agent": "principal-software-architect",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        ".agentic/memory/raw_repo_inventory.json"
+      ],
+      "outputs": [
+        ".agentic/memory/project_profile.json"
+      ],
+      "quality_gate_id": null
+    },
+    {
+      "stage_id": "ONBOARD-04-BASELINE-VERIFY",
+      "name": "Baseline Build & Test Execution",
+      "order": 4,
+      "agent": "qa-engineer",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        ".agentic/memory/project_profile.json"
+      ],
+      "outputs": [
+        ".agentic/logs/baseline_test_results.log"
+      ],
+      "quality_gate_id": null
+    },
+    {
+      "stage_id": "ONBOARD-05-SECURITY-BASELINE",
+      "name": "Baseline Dependency & Vulnerability Scan",
+      "order": 5,
+      "agent": "security-auditor",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        "workspace_root"
+      ],
+      "outputs": [
+        "docs/INITIAL_SECURITY_BASELINE.md"
+      ],
+      "quality_gate_id": null
+    },
+    {
+      "stage_id": "ONBOARD-06-MEMORY-INDEX",
+      "name": "Index Project Profile in Memory",
+      "order": 6,
+      "agent": "knowledge-manager",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        ".agentic/memory/project_profile.json"
+      ],
+      "outputs": [
+        "docs/PROJECT_ONBOARDING_SUMMARY.md"
+      ],
+      "quality_gate_id": null
+    }
+  ],
+  "quality_gates": [],
+  "failure_handling": {
+    "retry_limit": 2,
+    "fallback_action": "RECORD_PARTIAL_PROFILE_AND_NOTIFY",
+    "escalation_target": "chief-orchestrator"
+  },
+  "completion_criteria": [
+    ".agentic/memory/project_profile.json conforms to project_profile.schema.json",
+    "User uncommitted diff is preserved and isolated",
+    "Baseline build and test status documented"
+  ],
+  "expected_deliverables": [
+    ".agentic/memory/project_profile.json",
+    "docs/PROJECT_ONBOARDING_SUMMARY.md",
+    "docs/INITIAL_SECURITY_BASELINE.md"
+  ]
+}

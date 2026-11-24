@@ -1,0 +1,25 @@
+{
+  "lesson_id": "LESSON-0003",
+  "timestamp": "2026-11-16T03:30:00Z",
+  "status": "VALIDATED",
+  "original_problem": "Static security analyzer flagged potential DOM-based Cross-Site Scripting (XSS) in markdown preview widget.",
+  "technical_context": {
+    "component": "markdown_renderer",
+    "environment": "web_frontend",
+    "files_affected": ["src/components/MarkdownViewer.tsx"]
+  },
+  "verified_root_cause": "Raw HTML rendering was enabled without DOMPurify sanitization hook, permitting inline script injection.",
+  "solution": "Integrated DOMPurify hook with strict ALLOWED_TAGS allow-list and enabled Content-Security-Policy headers.",
+  "regression_prevention_strategy": {
+    "automated_test_added": true,
+    "policy_or_lint_rule": "react/no-danger ESLint rule",
+    "description": "Added test injecting <script>alert(1)</script> and <img onerror=...> payloads asserting sanitization."
+  },
+  "supporting_evidence": {
+    "verification_command": "npm test -- src/components/MarkdownViewer.test.tsx",
+    "verification_output_summary": "Passed. All malicious XSS vector strings stripped cleanly. Semgrep security audit zero findings.",
+    "test_passed": true
+  },
+  "applicable_framework_or_version": "React >= 18.0 / DOMPurify >= 3.0",
+  "tags": ["security", "xss", "dompurify", "react"]
+}

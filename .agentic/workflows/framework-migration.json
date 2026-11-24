@@ -1,0 +1,96 @@
+{
+  "id": "framework-migration",
+  "name": "Framework and Runtime Migration",
+  "description": "Systematic migration across major framework or language versions using the Strangler Fig pattern.",
+  "operating_mode": "EXISTING_PROJECT",
+  "trigger_conditions": [
+    "Language or framework version reaching end-of-life",
+    "User requests major framework upgrade"
+  ],
+  "required_agents": [
+    "principal-software-architect",
+    "technical-research",
+    "backend-developer",
+    "unit-testing",
+    "qa-engineer"
+  ],
+  "input_artifacts": [
+    "migration_brief.md"
+  ],
+  "execution_stages": [
+    {
+      "stage_id": "MIG-01-BREAKING-CHANGES",
+      "name": "Breaking Changes & Deprecation Analysis",
+      "order": 1,
+      "agent": "technical-research",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        "migration_brief.md"
+      ],
+      "outputs": [
+        "docs/MIGRATION_ANALYSIS.md"
+      ],
+      "quality_gate_id": null
+    },
+    {
+      "stage_id": "MIG-02-STRANGLER-ADAPTER",
+      "name": "Compatibility Layer / Shims Implementation",
+      "order": 2,
+      "agent": "principal-software-architect",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        "docs/MIGRATION_ANALYSIS.md"
+      ],
+      "outputs": [
+        "src/adapters/compat/"
+      ],
+      "quality_gate_id": null
+    },
+    {
+      "stage_id": "MIG-03-INCREMENTAL-UPGRADE",
+      "name": "Module-by-Module Code Modernization",
+      "order": 3,
+      "agent": "backend-developer",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        "src/adapters/compat/"
+      ],
+      "outputs": [
+        "src/"
+      ],
+      "quality_gate_id": null
+    },
+    {
+      "stage_id": "MIG-04-REGRESSION-SUITE",
+      "name": "Full Test Matrix Regression Verification",
+      "order": 4,
+      "agent": "qa-engineer",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        "src/"
+      ],
+      "outputs": [
+        ".agentic/logs/migration_regression.log"
+      ],
+      "quality_gate_id": "GATE-CODE-003"
+    }
+  ],
+  "quality_gates": [
+    "GATE-CODE-003"
+  ],
+  "failure_handling": {
+    "retry_limit": 2,
+    "fallback_action": "ROLLBACK_MIGRATION_SLICE",
+    "escalation_target": "principal-software-architect"
+  },
+  "completion_criteria": [
+    "All modules compile on new target runtime",
+    "Zero deprecation warnings emitted",
+    "100% of regression tests pass"
+  ],
+  "expected_deliverables": [
+    "Updated dependency manifests",
+    "Migrated source code",
+    "docs/MIGRATION_ANALYSIS.md"
+  ]
+}

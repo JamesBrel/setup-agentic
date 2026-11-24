@@ -1,0 +1,95 @@
+{
+  "id": "bug-fixing",
+  "name": "Autonomous Root-Cause Bug Fixing",
+  "description": "Reproduce defect with failing test, isolate root cause, apply surgical fix, verify regression prevention, and record lesson.",
+  "operating_mode": "HYBRID",
+  "trigger_conditions": [
+    "Bug report or failing test identified",
+    "Command: /fix-bug or !fix-bug"
+  ],
+  "required_agents": [
+    "unit-testing",
+    "backend-developer",
+    "code-reviewer",
+    "learning-improvement"
+  ],
+  "input_artifacts": [
+    "bug_report.md"
+  ],
+  "execution_stages": [
+    {
+      "stage_id": "BUG-01-REPRODUCE",
+      "name": "Reproduction Test Case Creation (Red)",
+      "order": 1,
+      "agent": "unit-testing",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        "bug_report.md"
+      ],
+      "outputs": [
+        "tests/reproduction_test.py"
+      ],
+      "quality_gate_id": null
+    },
+    {
+      "stage_id": "BUG-02-ROOT-CAUSE-FIX",
+      "name": "Root Cause Identification and Surgical Fix",
+      "order": 2,
+      "agent": "backend-developer",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        "tests/reproduction_test.py"
+      ],
+      "outputs": [
+        "src/"
+      ],
+      "quality_gate_id": null
+    },
+    {
+      "stage_id": "BUG-03-VERIFICATION",
+      "name": "Regression Test Execution (Green)",
+      "order": 3,
+      "agent": "unit-testing",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        "src/"
+      ],
+      "outputs": [
+        ".agentic/logs/bug_fix_verification.log"
+      ],
+      "quality_gate_id": "GATE-CODE-003"
+    },
+    {
+      "stage_id": "BUG-04-LESSON-CAPTURE",
+      "name": "Validated Lesson Recording",
+      "order": 4,
+      "agent": "learning-improvement",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        ".agentic/logs/bug_fix_verification.log"
+      ],
+      "outputs": [
+        ".agentic/memory/lessons/"
+      ],
+      "quality_gate_id": null
+    }
+  ],
+  "quality_gates": [
+    "GATE-CODE-003"
+  ],
+  "failure_handling": {
+    "retry_limit": 3,
+    "fallback_action": "REVERT_AND_RETRY_WITH_ALTERNATIVE_HYPOTHESIS",
+    "escalation_target": "chief-orchestrator"
+  },
+  "completion_criteria": [
+    "Reproduction test now passes consistently",
+    "Zero regressions in baseline test suite",
+    "Validated lesson recorded in .agentic/memory/lessons/"
+  ],
+  "expected_deliverables": [
+    "Fixed source files",
+    "Reproduction test case",
+    ".agentic/memory/lessons/LESSON-*.json"
+  ]
+}

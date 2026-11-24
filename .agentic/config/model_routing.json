@@ -1,0 +1,125 @@
+{
+  "$schema": "../schemas/model_routing.schema.json",
+  "active_provider": "gemini",
+  "tier_descriptions": {
+    "tier_reasoning": "High-complexity reasoning, architecture design, threat modeling, root-cause debugging, quality gate review",
+    "tier_standard": "Core code implementation, unit & integration test authoring, refactoring, dependency migrations",
+    "tier_fast": "Routine classification, metadata extraction, docstring generation, format translation, state summaries"
+  },
+  "providers": {
+    "gemini": {
+      "provider_name": "Google Gemini (Antigravity Native)",
+      "tier_reasoning": {
+        "model_alias": "gemini-pro-reasoning",
+        "context_window_tokens": 1000000,
+        "temperature": 0.2,
+        "tools_supported": true,
+        "subagent_capable": true
+      },
+      "tier_standard": {
+        "model_alias": "gemini-flash-standard",
+        "context_window_tokens": 1000000,
+        "temperature": 0.3,
+        "tools_supported": true,
+        "subagent_capable": true
+      },
+      "tier_fast": {
+        "model_alias": "gemini-flash-lite-fast",
+        "context_window_tokens": 500000,
+        "temperature": 0.1,
+        "tools_supported": true,
+        "subagent_capable": false
+      }
+    },
+    "claude": {
+      "provider_name": "Anthropic Claude",
+      "tier_reasoning": {
+        "model_alias": "claude-tier-opus-reasoning",
+        "context_window_tokens": 200000,
+        "temperature": 0.2,
+        "tools_supported": true,
+        "subagent_capable": true
+      },
+      "tier_standard": {
+        "model_alias": "claude-tier-sonnet-standard",
+        "context_window_tokens": 200000,
+        "temperature": 0.3,
+        "tools_supported": true,
+        "subagent_capable": true
+      },
+      "tier_fast": {
+        "model_alias": "claude-tier-haiku-fast",
+        "context_window_tokens": 200000,
+        "temperature": 0.1,
+        "tools_supported": true,
+        "subagent_capable": false
+      }
+    },
+    "gpt": {
+      "provider_name": "OpenAI GPT",
+      "tier_reasoning": {
+        "model_alias": "gpt-tier-high-reasoning",
+        "context_window_tokens": 128000,
+        "temperature": 0.2,
+        "tools_supported": true,
+        "subagent_capable": true
+      },
+      "tier_standard": {
+        "model_alias": "gpt-tier-standard-coding",
+        "context_window_tokens": 128000,
+        "temperature": 0.3,
+        "tools_supported": true,
+        "subagent_capable": true
+      },
+      "tier_fast": {
+        "model_alias": "gpt-tier-mini-fast",
+        "context_window_tokens": 128000,
+        "temperature": 0.1,
+        "tools_supported": true,
+        "subagent_capable": false
+      }
+    }
+  },
+  "routing_rules": [
+    {
+      "task_type": "ARCHITECTURE_DESIGN",
+      "required_tier": "tier_reasoning",
+      "rationale": "High-order conceptual modeling, boundary definition, and trade-off analysis"
+    },
+    {
+      "task_type": "SECURITY_AUDIT",
+      "required_tier": "tier_reasoning",
+      "rationale": "Adversarial threat analysis, vulnerability surface inspection"
+    },
+    {
+      "task_type": "COMPLEX_DEBUGGING",
+      "required_tier": "tier_reasoning",
+      "rationale": "Multi-component causal inference and root-cause determination"
+    },
+    {
+      "task_type": "CODE_IMPLEMENTATION",
+      "required_tier": "tier_standard",
+      "rationale": "High-fidelity code generation adhering to TRD specifications"
+    },
+    {
+      "task_type": "TEST_AUTHORING",
+      "required_tier": "tier_standard",
+      "rationale": "Precise test case synthesis matching acceptance criteria"
+    },
+    {
+      "task_type": "REFACTORING",
+      "required_tier": "tier_standard",
+      "rationale": "Preserving behavioral invariants while improving structure"
+    },
+    {
+      "task_type": "CLASSIFICATION_AND_EXTRACTION",
+      "required_tier": "tier_fast",
+      "rationale": "Fast token-efficient categorization and payload filtering"
+    },
+    {
+      "task_type": "DOCUMENTATION_SUMMARY",
+      "required_tier": "tier_fast",
+      "rationale": "Structured condensation of existing logs and code comments"
+    }
+  ]
+}

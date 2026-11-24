@@ -1,0 +1,112 @@
+{
+  "id": "testing-validation",
+  "name": "Holistic Quality & Test Validation",
+  "description": "Full-spectrum test execution: unit, integration, E2E, and accessibility verification.",
+  "operating_mode": "HYBRID",
+  "trigger_conditions": [
+    "Pre-release quality certification",
+    "Command: /review-and-test or !review-and-test"
+  ],
+  "required_agents": [
+    "qa-engineer",
+    "unit-testing",
+    "integration-testing",
+    "e2e-testing",
+    "accessibility-auditor"
+  ],
+  "input_artifacts": [
+    "src/"
+  ],
+  "execution_stages": [
+    {
+      "stage_id": "VAL-01-UNIT-TESTS",
+      "name": "Unit Test Suite Execution",
+      "order": 1,
+      "agent": "unit-testing",
+      "execution_mode": "PARALLEL",
+      "parallel_group": "TEST_SLICE",
+      "inputs": [
+        "src/"
+      ],
+      "outputs": [
+        ".agentic/logs/unit_tests.log"
+      ],
+      "quality_gate_id": null
+    },
+    {
+      "stage_id": "VAL-02-INTEGRATION-TESTS",
+      "name": "API & Integration Test Execution",
+      "order": 2,
+      "agent": "integration-testing",
+      "execution_mode": "PARALLEL",
+      "parallel_group": "TEST_SLICE",
+      "inputs": [
+        "src/"
+      ],
+      "outputs": [
+        ".agentic/logs/integration_tests.log"
+      ],
+      "quality_gate_id": null
+    },
+    {
+      "stage_id": "VAL-03-A11Y-AUDIT",
+      "name": "Automated Accessibility Audit",
+      "order": 3,
+      "agent": "accessibility-auditor",
+      "execution_mode": "PARALLEL",
+      "parallel_group": "TEST_SLICE",
+      "inputs": [
+        "src/"
+      ],
+      "outputs": [
+        "docs/ACCESSIBILITY_AUDIT.md"
+      ],
+      "quality_gate_id": null
+    },
+    {
+      "stage_id": "VAL-04-E2E-JOURNEYS",
+      "name": "End-to-End User Journey Tests",
+      "order": 4,
+      "agent": "e2e-testing",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        "src/"
+      ],
+      "outputs": [
+        ".agentic/logs/e2e_results.log"
+      ],
+      "quality_gate_id": null
+    },
+    {
+      "stage_id": "VAL-05-QA-SIGN-OFF",
+      "name": "Quality Assurance Master Certification",
+      "order": 5,
+      "agent": "qa-engineer",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        ".agentic/logs/"
+      ],
+      "outputs": [
+        "docs/TEST_REPORT.md"
+      ],
+      "quality_gate_id": "GATE-CODE-003"
+    }
+  ],
+  "quality_gates": [
+    "GATE-CODE-003"
+  ],
+  "failure_handling": {
+    "retry_limit": 2,
+    "fallback_action": "ISOLATE_FAILING_TESTS_AND_REPORT",
+    "escalation_target": "qa-engineer"
+  },
+  "completion_criteria": [
+    "100% of test suites pass without flaky retries",
+    "Zero WCAG AA accessibility violations",
+    "docs/TEST_REPORT.md generated with evidence"
+  ],
+  "expected_deliverables": [
+    "docs/TEST_REPORT.md",
+    "docs/ACCESSIBILITY_AUDIT.md"
+  ]
+}

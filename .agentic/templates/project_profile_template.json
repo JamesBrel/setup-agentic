@@ -1,0 +1,54 @@
+{
+  "project_id": "PROJECT-001",
+  "project_name": "Project Name",
+  "scanned_at": "YYYY-MM-DDTHH:MM:SSZ",
+  "languages_and_runtimes": [
+    {
+      "language": "TypeScript",
+      "version_detected": "^5.0.0"
+    }
+  ],
+  "frameworks": ["React", "Fastify"],
+  "dependency_manifests": [
+    {
+      "file": "package.json",
+      "type": "npm",
+      "lockfile_present": true
+    }
+  ],
+  "architectural_patterns": ["Clean Architecture", "Modular Monolith"],
+  "entry_points": ["src/index.ts"],
+  "module_map": [
+    {
+      "module_name": "core",
+      "path": "src/core",
+      "dependencies": []
+    }
+  ],
+  "database_schema_and_migrations": {
+    "db_type": "PostgreSQL",
+    "migration_dir": "migrations/",
+    "migration_count": 5
+  },
+  "api_contracts": ["docs/openapi.yaml"],
+  "testing_infrastructure": {
+    "test_runner": "Vitest",
+    "test_command": "npm test",
+    "existing_test_files_count": 12
+  },
+  "documentation_inventory": ["README.md"],
+  "git_status_and_user_diff": {
+    "clean_worktree": true,
+    "user_modified_files": [],
+    "head_commit": "abc1234"
+  },
+  "baseline_test_and_build_results": {
+    "build_passed": true,
+    "tests_passed": true,
+    "summary": "Baseline test suite executed cleanly with 12 passing tests."
+  },
+  "constraints_and_invariants": [
+    "Never modify database schemas without migrations",
+    "Do not break existing public API contracts"
+  ]
+}

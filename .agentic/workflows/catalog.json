@@ -1,0 +1,157 @@
+{
+  "total_workflows": 13,
+  "modes": {
+    "GREENFIELD": [
+      "new-project-creation"
+    ],
+    "EXISTING_PROJECT": [
+      "dependency-upgrades",
+      "existing-project-onboarding",
+      "framework-migration"
+    ],
+    "HYBRID": [
+      "bug-fixing",
+      "design-project",
+      "documentation-generation",
+      "feature-development",
+      "performance-optimization",
+      "refactoring",
+      "release-preparation",
+      "security-remediation",
+      "testing-validation"
+    ]
+  },
+  "workflows": {
+    "bug-fixing": {
+      "name": "Autonomous Root-Cause Bug Fixing",
+      "operating_mode": "HYBRID",
+      "description": "Reproduce defect with failing test, isolate root cause, apply surgical fix, verify regression prevention, and record lesson.",
+      "stages_count": 4,
+      "quality_gates": [
+        "GATE-CODE-003"
+      ],
+      "file": ".agentic/workflows/bug-fixing.json"
+    },
+    "dependency-upgrades": {
+      "name": "Automated Dependency Upgrades",
+      "operating_mode": "EXISTING_PROJECT",
+      "description": "Safe, non-breaking upgrade of project dependencies with lockfile verification and test validation.",
+      "stages_count": 3,
+      "quality_gates": [
+        "GATE-CODE-003"
+      ],
+      "file": ".agentic/workflows/dependency-upgrades.json"
+    },
+    "design-project": {
+      "name": "Autonomous UI/UX & Visual Design (Stitch / Figma)",
+      "operating_mode": "HYBRID",
+      "description": "End-to-end design pipeline transforming a product idea into complete UI/UX mockups, Design System, application logos, and icons using 100% Stitch or Figma MCP, outputting strictly into docs/.",
+      "stages_count": 6,
+      "quality_gates": [
+        "GATE-REQ-001",
+        "GATE-ARCH-002"
+      ],
+      "file": ".agentic/workflows/design-project.json"
+    },
+    "documentation-generation": {
+      "name": "Continuous Documentation Generation",
+      "operating_mode": "HYBRID",
+      "description": "Automated generation, synchronization, and link verification of developer guides and API docs.",
+      "stages_count": 3,
+      "quality_gates": [],
+      "file": ".agentic/workflows/documentation-generation.json"
+    },
+    "existing-project-onboarding": {
+      "name": "Existing Project Onboarding (Mode B Intelligence)",
+      "operating_mode": "EXISTING_PROJECT",
+      "description": "Comprehensive autonomous repository discovery, architectural profiling, test baselining, and user diff preservation.",
+      "stages_count": 6,
+      "quality_gates": [],
+      "file": ".agentic/workflows/existing-project-onboarding.json"
+    },
+    "feature-development": {
+      "name": "Targeted Feature Development",
+      "operating_mode": "HYBRID",
+      "description": "Scoped feature addition adhering to existing architectural invariants and contracts.",
+      "stages_count": 5,
+      "quality_gates": [
+        "GATE-CODE-003"
+      ],
+      "file": ".agentic/workflows/feature-development.json"
+    },
+    "framework-migration": {
+      "name": "Framework and Runtime Migration",
+      "operating_mode": "EXISTING_PROJECT",
+      "description": "Systematic migration across major framework or language versions using the Strangler Fig pattern.",
+      "stages_count": 4,
+      "quality_gates": [
+        "GATE-CODE-003"
+      ],
+      "file": ".agentic/workflows/framework-migration.json"
+    },
+    "new-project-creation": {
+      "name": "New Project Creation (Mode A Greenfield)",
+      "operating_mode": "GREENFIELD",
+      "description": "End-to-end 20-stage engineering lifecycle for creating a new software product from conception to release.",
+      "stages_count": 18,
+      "quality_gates": [
+        "GATE-REQ-001",
+        "GATE-ARCH-002",
+        "GATE-CODE-003",
+        "GATE-SEC-004",
+        "GATE-REL-005"
+      ],
+      "file": ".agentic/workflows/new-project-creation.json"
+    },
+    "performance-optimization": {
+      "name": "Performance and Latency Optimization",
+      "operating_mode": "HYBRID",
+      "description": "Systematic benchmarking, hotspot identification, query tuning, and verification of SLA targets.",
+      "stages_count": 3,
+      "quality_gates": [
+        "GATE-CODE-003"
+      ],
+      "file": ".agentic/workflows/performance-optimization.json"
+    },
+    "refactoring": {
+      "name": "Behavior-Preserving Refactoring",
+      "operating_mode": "HYBRID",
+      "description": "Improve code architecture, reduce cyclomatic complexity, and adhere to SOLID principles without modifying observable behavior.",
+      "stages_count": 4,
+      "quality_gates": [
+        "GATE-CODE-003"
+      ],
+      "file": ".agentic/workflows/refactoring.json"
+    },
+    "release-preparation": {
+      "name": "Release Packaging and Deployment Certification",
+      "operating_mode": "HYBRID",
+      "description": "Certify GATE-REL-005, calculate SemVer, generate CHANGELOG.md, package artifacts, and request human deployment approval.",
+      "stages_count": 4,
+      "quality_gates": [
+        "GATE-REL-005"
+      ],
+      "file": ".agentic/workflows/release-preparation.json"
+    },
+    "security-remediation": {
+      "name": "Security Vulnerability Remediation",
+      "operating_mode": "HYBRID",
+      "description": "Urgent patching of SAST, SCA, or secret leak findings to meet GATE-SEC-004 standards.",
+      "stages_count": 3,
+      "quality_gates": [
+        "GATE-SEC-004"
+      ],
+      "file": ".agentic/workflows/security-remediation.json"
+    },
+    "testing-validation": {
+      "name": "Holistic Quality & Test Validation",
+      "operating_mode": "HYBRID",
+      "description": "Full-spectrum test execution: unit, integration, E2E, and accessibility verification.",
+      "stages_count": 5,
+      "quality_gates": [
+        "GATE-CODE-003"
+      ],
+      "file": ".agentic/workflows/testing-validation.json"
+    }
+  }
+}

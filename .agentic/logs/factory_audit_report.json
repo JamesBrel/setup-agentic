@@ -1,0 +1,41 @@
+{
+  "timestamp": "2026-11-24T11:12:54.470634+00:00",
+  "factory_version": "3.0.0",
+  "health_status": "OPTIMAL",
+  "metrics": {
+    "total_specialist_agents": 47,
+    "tier_distribution": {
+      "tier_reasoning": 27,
+      "tier_standard": 15,
+      "tier_fast": 5
+    },
+    "division_counts": {
+      "quality": 9,
+      "management": 5,
+      "architecture": 9,
+      "development": 9,
+      "product": 5,
+      "infrastructure": 5,
+      "intelligence": 5
+    },
+    "total_modular_skills": 31,
+    "total_canonical_workflows": 13,
+    "total_validated_lessons": 3,
+    "total_quality_gates": 5,
+    "schema_conformance_rate": "100%",
+    "task_completion_rate": "100%",
+    "security_policy_enforcement": "STRICT_BLOCKING"
+  },
+  "proposed_improvements": [
+    {
+      "target": "skills/flutter-dart",
+      "proposal": "Include automated Drift migration testing patterns alongside Bloc testing.",
+      "requires_approval": false
+    },
+    {
+      "target": "config/model_routing.json",
+      "proposal": "Add local Ollama / vLLM provider endpoints for offline zero-cost dev mode.",
+      "requires_approval": false
+    }
+  ]
+}

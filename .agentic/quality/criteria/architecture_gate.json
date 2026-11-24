@@ -1,0 +1,33 @@
+{
+  "gate_id": "GATE-ARCH-002",
+  "name": "Architecture & TRD Gate",
+  "stage": "ARCHITECTURE_DESIGN",
+  "description": "Certifies that the TRD covers 100% of PRD functional requirements and establishes sound design patterns.",
+  "enforcing_agents": ["principal-software-architect", "trd-architect", "security-architect"],
+  "blocking": true,
+  "checks": [
+    {
+      "check_id": "ARCH-CHK-01",
+      "name": "TRD Schema Validation",
+      "category": "ARCHITECTURE_VALIDATION",
+      "evaluation_method": "JSON_SCHEMA_CHECK",
+      "required_result": "VALID"
+    },
+    {
+      "check_id": "ARCH-CHK-02",
+      "name": "Traceability Matrix Completeness",
+      "category": "ARCHITECTURE_VALIDATION",
+      "evaluation_method": "TRACEABILITY_CHECK",
+      "required_result": "100% PRD functional items mapped to technical components"
+    },
+    {
+      "check_id": "ARCH-CHK-03",
+      "name": "Threat Model Approval",
+      "category": "SECURITY_AUDIT",
+      "evaluation_method": "SIGN_OFF_VERIFICATION",
+      "required_result": "Threat model present and signed by security architect"
+    }
+  ],
+  "pass_criteria": "Full traceability and threat model approval logged.",
+  "failure_action": "BLOCK_WORKFLOW"
+}

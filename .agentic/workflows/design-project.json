@@ -1,0 +1,105 @@
+{
+  "id": "design-project",
+  "name": "Autonomous UI/UX & Visual Design (Stitch / Figma)",
+  "description": "End-to-end design pipeline transforming a product idea into complete UI/UX mockups, Design System, application logos, and icons using 100% Stitch or Figma MCP, outputting strictly into docs/.",
+  "operating_mode": "HYBRID",
+  "trigger_conditions": [
+    "User requests visual design, UI/UX, logo, or Design System from an idea",
+    "Command: /design_project or !design_project",
+    "CLI invocation: run_workflow.py --workflow design-project"
+  ],
+  "required_agents": [
+    "chief-orchestrator",
+    "project_designer",
+    "accessibility-auditor",
+    "documentation-engineer"
+  ],
+  "input_artifacts": [
+    "product_idea_or_brief"
+  ],
+  "execution_stages": [
+    {
+      "stage_id": "DESIGN-01-CONCEPT",
+      "name": "Concept & Visual Direction",
+      "order": 1,
+      "agent": "project_designer",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": ["product_idea_or_brief"],
+      "outputs": ["docs/design/aesthetic_direction.md"],
+      "quality_gate_id": null
+    },
+    {
+      "stage_id": "DESIGN-02-BRANDING",
+      "name": "Brand Identity, Logo & App Icons Creation (MCP)",
+      "order": 2,
+      "agent": "project_designer",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": ["docs/design/aesthetic_direction.md"],
+      "outputs": ["docs/logos/", "docs/icons/", "docs/BRAND_GUIDELINES.md"],
+      "quality_gate_id": null
+    },
+    {
+      "stage_id": "DESIGN-03-DESIGN-SYSTEM",
+      "name": "Design System & Tokens Creation (Stitch / Figma MCP)",
+      "order": 3,
+      "agent": "project_designer",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": ["docs/design/aesthetic_direction.md"],
+      "outputs": ["docs/design/design_system.md", "docs/design/tokens.json"],
+      "quality_gate_id": "GATE-ARCH-002"
+    },
+    {
+      "stage_id": "DESIGN-04-SCREENS",
+      "name": "High-Fidelity Screen Generation & Variants (Stitch / Figma MCP)",
+      "order": 4,
+      "agent": "project_designer",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": ["docs/design/design_system.md", "docs/design/tokens.json"],
+      "outputs": ["docs/screens/"],
+      "quality_gate_id": null
+    },
+    {
+      "stage_id": "DESIGN-05-A11Y-AUDIT",
+      "name": "Visual Accessibility & Contrast Verification (WCAG AA)",
+      "order": 5,
+      "agent": "accessibility-auditor",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": ["docs/screens/", "docs/design/tokens.json"],
+      "outputs": ["docs/ACCESSIBILITY_AUDIT.md"],
+      "quality_gate_id": null
+    },
+    {
+      "stage_id": "DESIGN-06-HANDOFF",
+      "name": "Design Specification & Developer Handoff Package",
+      "order": 6,
+      "agent": "documentation-engineer",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": ["docs/screens/", "docs/design/design_system.md", "docs/logos/"],
+      "outputs": ["docs/DESIGN_SPECIFICATION.md"],
+      "quality_gate_id": "GATE-REQ-001"
+    }
+  ],
+  "quality_gates": [
+    "GATE-REQ-001",
+    "GATE-ARCH-002"
+  ],
+  "failure_handling": {
+    "retry_limit": 3,
+    "fallback_action": "REGENERATE_SCREEN_OR_TOKEN_VIA_ALTERNATIVE_MCP",
+    "escalation_target": "chief-orchestrator"
+  },
+  "completion_criteria": [
+    "All screens, tokens, logos, and icons generated via Stitch or Figma MCP",
+    "All deliverables reside exclusively inside docs/",
+    "WCAG AA contrast validation confirmed",
+    "docs/DESIGN_SPECIFICATION.md ready for developer implementation in app/"
+  ],
+  "expected_deliverables": [
+    "docs/logos/",
+    "docs/icons/",
+    "docs/design/design_system.md",
+    "docs/design/tokens.json",
+    "docs/screens/",
+    "docs/DESIGN_SPECIFICATION.md"
+  ]
+}

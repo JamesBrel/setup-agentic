@@ -1,0 +1,25 @@
+{
+  "lesson_id": "LESSON-0002",
+  "timestamp": "2026-11-16T03:15:00Z",
+  "status": "VALIDATED",
+  "original_problem": "Memory heap usage grew monotonically over long-running desktop sessions due to uncollected event listeners.",
+  "technical_context": {
+    "component": "ui_event_stream",
+    "environment": "client_runtime",
+    "files_affected": ["lib/src/presentation/blocs/telemetry_bloc.dart"]
+  },
+  "verified_root_cause": "StreamSubscription was instantiated in onResume lifecycle handler without calling cancel() during dispose / onPause.",
+  "solution": "Enforced explicit cancellation of StreamSubscriptions using composite disposable pattern and added dispose hooks.",
+  "regression_prevention_strategy": {
+    "automated_test_added": true,
+    "policy_or_lint_rule": "cancel_subscriptions lint rule",
+    "description": "Added test asserting subscription.isPaused / isCanceled after widget disposal."
+  },
+  "supporting_evidence": {
+    "verification_command": "flutter test test/telemetry_bloc_leak_test.dart",
+    "verification_output_summary": "Passed. Heap dump confirms 0 dangling references post-dispose.",
+    "test_passed": true
+  },
+  "applicable_framework_or_version": "Dart >= 3.0 / Flutter >= 3.16",
+  "tags": ["memory_leak", "dart", "flutter", "lifecycle"]
+}

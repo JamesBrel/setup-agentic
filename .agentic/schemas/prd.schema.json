@@ -1,0 +1,95 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ProductRequirementsDocument",
+  "description": "Canonical schema for an Agentic Software Factory V3 PRD",
+  "type": "object",
+  "required": [
+    "document_id",
+    "project_name",
+    "version",
+    "status",
+    "executive_summary",
+    "problem_statement",
+    "target_audience",
+    "user_personas",
+    "functional_requirements",
+    "non_functional_requirements",
+    "user_journeys",
+    "out_of_scope",
+    "success_metrics",
+    "signoff"
+  ],
+  "properties": {
+    "document_id": { "type": "string" },
+    "project_name": { "type": "string" },
+    "version": { "type": "string" },
+    "status": { "type": "string", "enum": ["DRAFT", "UNDER_REVIEW", "APPROVED", "SUPERSEDED"] },
+    "executive_summary": { "type": "string" },
+    "problem_statement": { "type": "string" },
+    "target_audience": { "type": "array", "items": { "type": "string" } },
+    "user_personas": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "role", "goals", "pain_points"],
+        "properties": {
+          "name": { "type": "string" },
+          "role": { "type": "string" },
+          "goals": { "type": "array", "items": { "type": "string" } },
+          "pain_points": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "functional_requirements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["req_id", "title", "description", "priority", "acceptance_criteria"],
+        "properties": {
+          "req_id": { "type": "string" },
+          "title": { "type": "string" },
+          "description": { "type": "string" },
+          "priority": { "type": "string", "enum": ["MUST_HAVE", "SHOULD_HAVE", "COULD_HAVE", "WONT_HAVE"] },
+          "acceptance_criteria": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "non_functional_requirements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["category", "specification", "metric", "target"],
+        "properties": {
+          "category": { "type": "string", "enum": ["PERFORMANCE", "SECURITY", "ACCESSIBILITY", "SCALABILITY", "RELIABILITY", "USABILITY"] },
+          "specification": { "type": "string" },
+          "metric": { "type": "string" },
+          "target": { "type": "string" }
+        }
+      }
+    },
+    "user_journeys": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["journey_id", "title", "steps"],
+        "properties": {
+          "journey_id": { "type": "string" },
+          "title": { "type": "string" },
+          "steps": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "out_of_scope": { "type": "array", "items": { "type": "string" } },
+    "success_metrics": { "type": "array", "items": { "type": "string" } },
+    "signoff": {
+      "type": "object",
+      "required": ["approved_by", "approval_date", "evidence"],
+      "properties": {
+        "approved_by": { "type": "string" },
+        "approval_date": { "type": "string" },
+        "evidence": { "type": "string" }
+      }
+    }
+  },
+  "additionalProperties": false
+}

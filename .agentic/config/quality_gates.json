@@ -1,0 +1,77 @@
+{
+  "policy_name": "Quality Gates Master Configuration",
+  "version": "3.0.0",
+  "enforcement_mode": "STRICT_BLOCKING",
+  "gates": [
+    {
+      "gate_id": "GATE-REQ-001",
+      "name": "Requirements & PRD Gate",
+      "stage": "REQUIREMENTS_ANALYSIS",
+      "enforcing_agents": ["requirements-engineer", "prd-architect"],
+      "blocking": true,
+      "checks": [
+        "PRD conforms to prd.schema.json",
+        "Functional requirements have testable acceptance criteria",
+        "Non-functional metrics defined (performance, security)",
+        "Out of scope explicitly demarcated"
+      ],
+      "pass_criteria": "All functional items have acceptance criteria and user signoff artifact exists"
+    },
+    {
+      "gate_id": "GATE-ARCH-002",
+      "name": "Architecture & TRD Gate",
+      "stage": "ARCHITECTURE_DESIGN",
+      "enforcing_agents": ["principal-software-architect", "trd-architect", "security-architect"],
+      "blocking": true,
+      "checks": [
+        "TRD conforms to trd.schema.json",
+        "Traceability matrix maps 100% of PRD functional requirements to components",
+        "Threat model documented and approved by security-architect",
+        "Database schema and API contracts specified"
+      ],
+      "pass_criteria": "Full traceability and architecture consistency signoff"
+    },
+    {
+      "gate_id": "GATE-CODE-003",
+      "name": "Code Quality & Unit Testing Gate",
+      "stage": "IMPLEMENTATION",
+      "enforcing_agents": ["unit-testing", "code-reviewer", "qa-engineer"],
+      "blocking": true,
+      "checks": [
+        "Clean compilation/transpilation with zero fatal errors",
+        "Unit test pass rate is 100%",
+        "Code adheres to Clean Architecture and SOLID principles",
+        "No untested public interfaces"
+      ],
+      "pass_criteria": "Clean build, 100% unit tests pass, code reviewer signoff"
+    },
+    {
+      "gate_id": "GATE-SEC-004",
+      "name": "Security & Vulnerability Gate",
+      "stage": "SECURITY_AUDIT",
+      "enforcing_agents": ["security-auditor", "security-architect"],
+      "blocking": true,
+      "checks": [
+        "Zero critical or high severity vulnerabilities in dependency audit",
+        "Static code analysis (SAST) shows no SQL injection, XSS, or path traversal",
+        "No hardcoded credentials, API keys, or private secrets",
+        "Authentication and authorization contracts strictly verified"
+      ],
+      "pass_criteria": "Zero critical/high security findings"
+    },
+    {
+      "gate_id": "GATE-REL-005",
+      "name": "Release & Delivery Gate",
+      "stage": "RELEASE_PREPARATION",
+      "enforcing_agents": ["release-manager", "e2e-testing", "documentation-engineer"],
+      "blocking": true,
+      "checks": [
+        "All previous gates passed with verified evidence",
+        "E2E test suite passes completely",
+        "Release documentation, changelog, and API docs are synchronized",
+        "Deliverable artifacts packaged and checksummed"
+      ],
+      "pass_criteria": "All integration tests pass, documentation current, clean tag ready"
+    }
+  ]
+}

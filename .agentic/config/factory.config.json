@@ -1,0 +1,52 @@
+{
+  "factory_name": "Agentic Software Factory",
+  "version": "4.0.0",
+  "schema_version": "1.0.0",
+  "operating_environment": {
+    "host_platform": "Google Antigravity",
+    "primary_family": "gemini",
+    "portable_architectures": ["gemini", "claude", "gpt", "local_compatible"]
+  },
+  "workspace_boundaries": {
+    "application_source_dir": "app",
+    "design_and_documentation_dir": "docs",
+    "factory_governance_dir": ".agentic"
+  },
+  "directories": {
+    "root": ".agentic",
+    "app": "app",
+    "docs": "docs",
+    "agents": ".agentic/agents",
+    "skills": ".agentic/skills",
+    "workflows": ".agentic/workflows",
+    "orchestration": ".agentic/orchestration",
+    "architecture": ".agentic/architecture",
+    "config": ".agentic/config",
+    "schemas": ".agentic/schemas",
+    "templates": ".agentic/templates",
+    "memory": ".agentic/memory",
+    "quality": ".agentic/quality",
+    "security": ".agentic/security",
+    "integrations": ".agentic/integrations",
+    "scripts": ".agentic/scripts",
+    "evaluations": ".agentic/evaluations",
+    "logs": ".agentic/logs"
+  },
+  "runtime_policies": {
+    "strict_mode": true,
+    "max_task_retries": 3,
+    "max_parallel_workers": 4,
+    "evidence_required_for_completion": true,
+    "preserve_unrelated_code": true,
+    "prevent_destructive_unauthorized_ops": true,
+    "dry_run_available": true,
+    "enforce_app_directory_for_code": true,
+    "enforce_docs_directory_for_design": true
+  },
+  "memory_policies": {
+    "store_unverified_assumptions": false,
+    "store_secrets_or_tokens": false,
+    "auto_prune_obsolete_lessons": true,
+    "lesson_retention_days": 365
+  }
+}

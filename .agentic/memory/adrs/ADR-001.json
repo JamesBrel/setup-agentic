@@ -1,0 +1,44 @@
+{
+  "adr_id": "ADR-001",
+  "title": "Adoption of Clean Architecture and Tiered Model Routing Abstraction",
+  "status": "ACCEPTED",
+  "date": "2026-11-16",
+  "deciders": [
+    "chief-orchestrator",
+    "principal-software-architect",
+    "security-architect"
+  ],
+  "context_and_problem": "The factory requires a modular architectural foundation that strictly separates application code from factory governance, while avoiding vendor lock-in to hardcoded foundation model identifiers.",
+  "decision_drivers": [
+    "Maintain complete independence between core domain logic and third-party frameworks",
+    "Prevent brittle prompt failures by decoupling model routing into capability tiers (reasoning, standard, fast)",
+    "Guarantee that all factory policies reside inside .agentic/ without polluting root application directories"
+  ],
+  "considered_options": [
+    {
+      "option": "Hardcoded model names with monolithic script architecture",
+      "pros": ["Simple initial setup"],
+      "cons": ["Brittle, provider lock-in, fails if model name deprecated, poor maintainability"]
+    },
+    {
+      "option": "Clean Architecture with Tier-Based Provider Abstraction (.agentic/)",
+      "pros": ["High modularity, portable across Gemini/Claude/GPT, testable in isolation, clear boundary"],
+      "cons": ["Requires formal schema definitions and abstraction layers"]
+    }
+  ],
+  "decision_outcome": "Adopt Clean Architecture with Tier-Based Provider Abstraction. Encapsulate all factory intelligence inside .agentic/.",
+  "consequences": {
+    "positive": [
+      "Application source code remains clean and free of agent scaffolding",
+      "Model routing dynamically swaps providers with zero code modifications",
+      "Deterministic testability of domain layers"
+    ],
+    "negative": [
+      "Initial configuration overhead requiring JSON schema validation"
+    ],
+    "risks": [
+      "Developers might mistakenly attempt to commit factory-owned configurations to root folders if unguided"
+    ]
+  },
+  "validation": "Automated factory validator (validate_factory.py) checks that all factory assets reside inside .agentic/ and pass schema validation."
+}

@@ -1,0 +1,125 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ProjectProfile",
+  "description": "Canonical schema for an Agentic Software Factory V3 existing project profile (Mode B)",
+  "type": "object",
+  "required": [
+    "project_id",
+    "project_name",
+    "scanned_at",
+    "languages_and_runtimes",
+    "frameworks",
+    "dependency_manifests",
+    "architectural_patterns",
+    "entry_points",
+    "module_map",
+    "database_schema_and_migrations",
+    "api_contracts",
+    "testing_infrastructure",
+    "documentation_inventory",
+    "git_status_and_user_diff",
+    "baseline_test_and_build_results",
+    "constraints_and_invariants"
+  ],
+  "properties": {
+    "project_id": { "type": "string" },
+    "project_name": { "type": "string" },
+    "scanned_at": { "type": "string" },
+    "languages_and_runtimes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["language", "version_detected"],
+        "properties": {
+          "language": { "type": "string" },
+          "version_detected": { "type": "string" }
+        }
+      }
+    },
+    "frameworks": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "dependency_manifests": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["file", "type", "lockfile_present"],
+        "properties": {
+          "file": { "type": "string" },
+          "type": { "type": "string" },
+          "lockfile_present": { "type": "boolean" }
+        }
+      }
+    },
+    "architectural_patterns": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "entry_points": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "module_map": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["module_name", "path", "dependencies"],
+        "properties": {
+          "module_name": { "type": "string" },
+          "path": { "type": "string" },
+          "dependencies": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "database_schema_and_migrations": {
+      "type": "object",
+      "required": ["db_type", "migration_dir", "migration_count"],
+      "properties": {
+        "db_type": { "type": "string" },
+        "migration_dir": { "type": "string" },
+        "migration_count": { "type": "integer" }
+      }
+    },
+    "api_contracts": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "testing_infrastructure": {
+      "type": "object",
+      "required": ["test_runner", "test_command", "existing_test_files_count"],
+      "properties": {
+        "test_runner": { "type": "string" },
+        "test_command": { "type": "string" },
+        "existing_test_files_count": { "type": "integer" }
+      }
+    },
+    "documentation_inventory": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "git_status_and_user_diff": {
+      "type": "object",
+      "required": ["clean_worktree", "user_modified_files", "head_commit"],
+      "properties": {
+        "clean_worktree": { "type": "boolean" },
+        "user_modified_files": { "type": "array", "items": { "type": "string" } },
+        "head_commit": { "type": "string" }
+      }
+    },
+    "baseline_test_and_build_results": {
+      "type": "object",
+      "required": ["build_passed", "tests_passed", "summary"],
+      "properties": {
+        "build_passed": { "type": "boolean" },
+        "tests_passed": { "type": "boolean" },
+        "summary": { "type": "string" }
+      }
+    },
+    "constraints_and_invariants": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "additionalProperties": false
+}

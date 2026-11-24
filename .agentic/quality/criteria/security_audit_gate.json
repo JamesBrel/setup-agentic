@@ -1,0 +1,33 @@
+{
+  "gate_id": "GATE-SEC-004",
+  "name": "Security & Vulnerability Gate",
+  "stage": "SECURITY_AUDIT",
+  "description": "Zero-tolerance security verification across SAST, dependencies, and secret scans.",
+  "enforcing_agents": ["security-auditor", "security-architect"],
+  "blocking": true,
+  "checks": [
+    {
+      "check_id": "SEC-CHK-01",
+      "name": "Dependency CVE Audit",
+      "category": "DEPENDENCY_AUDIT",
+      "evaluation_method": "CLI_AUDIT",
+      "required_result": "0 CRITICAL / 0 HIGH"
+    },
+    {
+      "check_id": "SEC-CHK-02",
+      "name": "Static Application Security Testing (SAST)",
+      "category": "SECURITY_AUDIT",
+      "evaluation_method": "CLI_SAST",
+      "required_result": "0 CRITICAL / 0 HIGH"
+    },
+    {
+      "check_id": "SEC-CHK-03",
+      "name": "Automated Secret & Token Scan",
+      "category": "SECURITY_AUDIT",
+      "evaluation_method": "SECRET_SCAN",
+      "required_result": "0 SECRETS DETECTED"
+    }
+  ],
+  "pass_criteria": "Zero Critical or High severity security findings.",
+  "failure_action": "BLOCK_WORKFLOW"
+}

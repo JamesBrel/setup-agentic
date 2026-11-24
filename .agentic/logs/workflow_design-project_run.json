@@ -1,0 +1,45 @@
+{
+  "workflow_id": "design-project",
+  "status": "SUCCESS",
+  "total_tasks": 6,
+  "completed_tasks": 6,
+  "execution_log": [
+    {
+      "task_id": "TASK-DESIGN-01-CONCEPT",
+      "agent": "project_designer",
+      "final_status": "ACCEPTED",
+      "retries": 0
+    },
+    {
+      "task_id": "TASK-DESIGN-02-BRANDING",
+      "agent": "project_designer",
+      "final_status": "ACCEPTED",
+      "retries": 0
+    },
+    {
+      "task_id": "TASK-DESIGN-03-DESIGN-SYSTEM",
+      "agent": "project_designer",
+      "final_status": "ACCEPTED",
+      "retries": 0
+    },
+    {
+      "task_id": "TASK-DESIGN-04-SCREENS",
+      "agent": "project_designer",
+      "final_status": "ACCEPTED",
+      "retries": 0
+    },
+    {
+      "task_id": "TASK-DESIGN-05-A11Y-AUDIT",
+      "agent": "accessibility-auditor",
+      "final_status": "ACCEPTED",
+      "retries": 0
+    },
+    {
+      "task_id": "TASK-DESIGN-06-HANDOFF",
+      "agent": "documentation-engineer",
+      "final_status": "ACCEPTED",
+      "retries": 0
+    }
+  ],
+  "timestamp": "2026-11-24T11:15:00.076893+00:00"
+}

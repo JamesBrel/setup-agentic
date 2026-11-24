@@ -1,0 +1,80 @@
+{
+  "id": "performance-optimization",
+  "name": "Performance and Latency Optimization",
+  "description": "Systematic benchmarking, hotspot identification, query tuning, and verification of SLA targets.",
+  "operating_mode": "HYBRID",
+  "trigger_conditions": [
+    "Latency exceeds TRD SLA thresholds",
+    "Profiling indicates CPU or memory bottleneck"
+  ],
+  "required_agents": [
+    "performance-engineer",
+    "backend-developer",
+    "database-engineer",
+    "qa-engineer"
+  ],
+  "input_artifacts": [
+    "performance_sla.json"
+  ],
+  "execution_stages": [
+    {
+      "stage_id": "PERF-01-BENCHMARK-BASELINE",
+      "name": "Initial Baseline Measurement & Flame Graph Capture",
+      "order": 1,
+      "agent": "performance-engineer",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        "performance_sla.json"
+      ],
+      "outputs": [
+        ".agentic/logs/perf_baseline.json"
+      ],
+      "quality_gate_id": null
+    },
+    {
+      "stage_id": "PERF-02-OPTIMIZATION-APPLY",
+      "name": "Targeted Code & Query Optimization",
+      "order": 2,
+      "agent": "backend-developer",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        ".agentic/logs/perf_baseline.json"
+      ],
+      "outputs": [
+        "src/"
+      ],
+      "quality_gate_id": null
+    },
+    {
+      "stage_id": "PERF-03-BENCHMARK-VERIFY",
+      "name": "Post-Optimization Benchmark & Regression Test",
+      "order": 3,
+      "agent": "performance-engineer",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        "src/"
+      ],
+      "outputs": [
+        "docs/PERFORMANCE_REPORT.md"
+      ],
+      "quality_gate_id": "GATE-CODE-003"
+    }
+  ],
+  "quality_gates": [
+    "GATE-CODE-003"
+  ],
+  "failure_handling": {
+    "retry_limit": 2,
+    "fallback_action": "REVERT_OPTIMIZATION_IF_DEGRADED",
+    "escalation_target": "performance-engineer"
+  },
+  "completion_criteria": [
+    "Measured latency meets or exceeds TRD SLA targets",
+    "Zero regressions in functional test suite",
+    "docs/PERFORMANCE_REPORT.md signed off"
+  ],
+  "expected_deliverables": [
+    "Optimized source files",
+    "docs/PERFORMANCE_REPORT.md"
+  ]
+}

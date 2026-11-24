@@ -1,0 +1,20 @@
+{
+  "timestamp": "YYYY-MM-DDTHH:MM:SSZ",
+  "sender_agent": "sender-agent-id",
+  "receiver_agent": "receiver-agent-id",
+  "task_id": "TASK-ID",
+  "workflow_id": "workflow-id",
+  "artifacts": [
+    {
+      "path": "path/to/artifact",
+      "sha256": "checksum_hash",
+      "type": "SOURCE_CODE | TEST_SUITE | SPECIFICATION"
+    }
+  ],
+  "verification_status": "PASSED | FAILED",
+  "evidence_summary": "Summary of executed verification commands and results",
+  "risks_and_caveats": [
+    "Known limitation or downstream assumption"
+  ],
+  "state_transition": "READY_FOR_VERIFICATION"
+}

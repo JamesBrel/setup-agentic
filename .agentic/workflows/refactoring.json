@@ -1,0 +1,94 @@
+{
+  "id": "refactoring",
+  "name": "Behavior-Preserving Refactoring",
+  "description": "Improve code architecture, reduce cyclomatic complexity, and adhere to SOLID principles without modifying observable behavior.",
+  "operating_mode": "HYBRID",
+  "trigger_conditions": [
+    "Technical debt alert or code smell detected",
+    "User requests refactoring of designated modules"
+  ],
+  "required_agents": [
+    "principal-software-architect",
+    "backend-developer",
+    "unit-testing",
+    "code-reviewer"
+  ],
+  "input_artifacts": [
+    "refactor_scope.json"
+  ],
+  "execution_stages": [
+    {
+      "stage_id": "REF-01-BASELINE-TESTS",
+      "name": "Characterization Test Verification",
+      "order": 1,
+      "agent": "unit-testing",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        "refactor_scope.json"
+      ],
+      "outputs": [
+        ".agentic/logs/characterization_baseline.log"
+      ],
+      "quality_gate_id": null
+    },
+    {
+      "stage_id": "REF-02-REFACTOR-APPLY",
+      "name": "Stepwise Micro-Refactoring Execution",
+      "order": 2,
+      "agent": "backend-developer",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        "refactor_scope.json"
+      ],
+      "outputs": [
+        "src/"
+      ],
+      "quality_gate_id": null
+    },
+    {
+      "stage_id": "REF-03-VERIFICATION",
+      "name": "Behavioral Equivalence Verification",
+      "order": 3,
+      "agent": "unit-testing",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        "src/"
+      ],
+      "outputs": [
+        ".agentic/logs/refactor_verification.log"
+      ],
+      "quality_gate_id": "GATE-CODE-003"
+    },
+    {
+      "stage_id": "REF-04-REVIEW",
+      "name": "Architecture & Complexity Review",
+      "order": 4,
+      "agent": "code-reviewer",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        "git_diff"
+      ],
+      "outputs": [
+        ".agentic/logs/refactor_review.json"
+      ],
+      "quality_gate_id": null
+    }
+  ],
+  "quality_gates": [
+    "GATE-CODE-003"
+  ],
+  "failure_handling": {
+    "retry_limit": 2,
+    "fallback_action": "REVERT_TO_LAST_GREEN_COMMIT",
+    "escalation_target": "principal-software-architect"
+  },
+  "completion_criteria": [
+    "100% of characterization tests pass without divergence",
+    "Cyclomatic complexity reduced",
+    "Zero external API contract changes"
+  ],
+  "expected_deliverables": [
+    "Refactored source files",
+    ".agentic/logs/refactor_review.json"
+  ]
+}

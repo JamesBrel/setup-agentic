@@ -1,0 +1,236 @@
+{
+  "total_skills": 31,
+  "categories": {
+    "product": [
+      "prd-engineering",
+      "requirements-engineering",
+      "trd-engineering"
+    ],
+    "architecture": [
+      "api-engineering",
+      "clean-architecture",
+      "database-architecture",
+      "design-system-engineering",
+      "desktop-engineering",
+      "domain-driven-design",
+      "graphic-design",
+      "legacy-modernization",
+      "mobile-engineering",
+      "software-architecture",
+      "software-migration",
+      "solid-principles",
+      "web-engineering"
+    ],
+    "development": [
+      "csharp-dotnet",
+      "flutter-dart",
+      "java-engineering",
+      "laravel-php",
+      "nodejs-typescript",
+      "python-engineering",
+      "react-typescript"
+    ],
+    "quality": [
+      "accessibility-engineering",
+      "performance-optimization",
+      "testing-qa"
+    ],
+    "infrastructure": [
+      "cicd-engineering",
+      "cloud-engineering",
+      "devsecops",
+      "documentation-engineering"
+    ],
+    "security": [
+      "application-security"
+    ]
+  },
+  "skills": {
+    "accessibility-engineering": {
+      "name": "Accessibility Engineering",
+      "category": "quality",
+      "description": "Accessible software design, WCAG 2.1 AA/AAA compliance, screen readers, and universal design.",
+      "path": ".agentic/skills/accessibility-engineering/SKILL.md"
+    },
+    "api-engineering": {
+      "name": "Api Engineering",
+      "category": "architecture",
+      "description": "Design, standardization, versioning, and documentation of RESTful, GraphQL, and gRPC APIs.",
+      "path": ".agentic/skills/api-engineering/SKILL.md"
+    },
+    "application-security": {
+      "name": "Application Security",
+      "category": "security",
+      "description": "Secure coding practices, OWASP Top 10 mitigation, cryptographic standards, and vulnerability remediation.",
+      "path": ".agentic/skills/application-security/SKILL.md"
+    },
+    "cicd-engineering": {
+      "name": "Cicd Engineering",
+      "category": "infrastructure",
+      "description": "Continuous integration, automated testing workflows, and automated continuous deployment pipelines.",
+      "path": ".agentic/skills/cicd-engineering/SKILL.md"
+    },
+    "clean-architecture": {
+      "name": "Clean Architecture",
+      "category": "architecture",
+      "description": "Implementation of Uncle Bob's Clean Architecture and Hexagonal / Ports & Adapters patterns.",
+      "path": ".agentic/skills/clean-architecture/SKILL.md"
+    },
+    "cloud-engineering": {
+      "name": "Cloud Engineering",
+      "category": "infrastructure",
+      "description": "Cloud infrastructure architecture, serverless, container orchestration, and Well-Architected frameworks.",
+      "path": ".agentic/skills/cloud-engineering/SKILL.md"
+    },
+    "csharp-dotnet": {
+      "name": "Csharp Dotnet",
+      "category": "development",
+      "description": "Cross-platform enterprise .NET 8+ development, ASP.NET Core, Entity Framework Core, and xUnit.",
+      "path": ".agentic/skills/csharp-dotnet/SKILL.md"
+    },
+    "database-architecture": {
+      "name": "Database Architecture",
+      "category": "architecture",
+      "description": "Relational and NoSQL data modeling, schema migration engineering, indexing, and ACID guarantees.",
+      "path": ".agentic/skills/database-architecture/SKILL.md"
+    },
+    "design-system-engineering": {
+      "name": "Design System Engineering",
+      "category": "architecture",
+      "description": "Complete UI/UX Design System, tokens, atomic components, and high-fidelity screen mockups via Stitch/Figma MCP",
+      "path": ".agentic/skills/design-system-engineering/SKILL.md"
+    },
+    "desktop-engineering": {
+      "name": "Desktop Engineering",
+      "category": "architecture",
+      "description": "Cross-platform desktop application engineering with Electron, Tauri, Flutter Desktop, and OS integration.",
+      "path": ".agentic/skills/desktop-engineering/SKILL.md"
+    },
+    "devsecops": {
+      "name": "Devsecops",
+      "category": "infrastructure",
+      "description": "Integrating automated security scanning, policy-as-code, and compliance gates into DevOps lifecycles.",
+      "path": ".agentic/skills/devsecops/SKILL.md"
+    },
+    "documentation-engineering": {
+      "name": "Documentation Engineering",
+      "category": "infrastructure",
+      "description": "Technical writing, API documentation, Mermaid diagramming, and markdown linting.",
+      "path": ".agentic/skills/documentation-engineering/SKILL.md"
+    },
+    "domain-driven-design": {
+      "name": "Domain Driven Design",
+      "category": "architecture",
+      "description": "Strategic and tactical DDD: Ubiquitous Language, Bounded Contexts, Aggregates, and Value Objects.",
+      "path": ".agentic/skills/domain-driven-design/SKILL.md"
+    },
+    "flutter-dart": {
+      "name": "Flutter Dart",
+      "category": "development",
+      "description": "Cross-platform mobile and multi-platform development using Flutter framework and Dart language.",
+      "path": ".agentic/skills/flutter-dart/SKILL.md"
+    },
+    "graphic-design": {
+      "name": "Graphic Design",
+      "category": "architecture",
+      "description": "Visual identity, logo design, application icons, color palettes, and typography using Stitch/Figma MCP",
+      "path": ".agentic/skills/graphic-design/SKILL.md"
+    },
+    "java-engineering": {
+      "name": "Java Engineering",
+      "category": "development",
+      "description": "Enterprise Java development with Spring Boot, JPA/Hibernate, Gradle/Maven, and JUnit 5.",
+      "path": ".agentic/skills/java-engineering/SKILL.md"
+    },
+    "laravel-php": {
+      "name": "Laravel Php",
+      "category": "development",
+      "description": "Modern enterprise PHP development using the Laravel framework, Eloquent ORM, and Artisan tooling.",
+      "path": ".agentic/skills/laravel-php/SKILL.md"
+    },
+    "legacy-modernization": {
+      "name": "Legacy Modernization",
+      "category": "architecture",
+      "description": "Techniques for refactoring legacy codebases, adding characterization tests, and reducing technical debt.",
+      "path": ".agentic/skills/legacy-modernization/SKILL.md"
+    },
+    "mobile-engineering": {
+      "name": "Mobile Engineering",
+      "category": "architecture",
+      "description": "Mobile application lifecycle, offline-first architectures, memory constraints, and app store readiness.",
+      "path": ".agentic/skills/mobile-engineering/SKILL.md"
+    },
+    "nodejs-typescript": {
+      "name": "Nodejs Typescript",
+      "category": "development",
+      "description": "Asynchronous backend microservices and API development on Node.js using TypeScript.",
+      "path": ".agentic/skills/nodejs-typescript/SKILL.md"
+    },
+    "performance-optimization": {
+      "name": "Performance Optimization",
+      "category": "quality",
+      "description": "Profiling, bottleneck identification, algorithmic optimization, memory leak resolution, and caching.",
+      "path": ".agentic/skills/performance-optimization/SKILL.md"
+    },
+    "prd-engineering": {
+      "name": "Prd Engineering",
+      "category": "product",
+      "description": "Standardized authoring, structuring, and schema validation of Product Requirements Documents.",
+      "path": ".agentic/skills/prd-engineering/SKILL.md"
+    },
+    "python-engineering": {
+      "name": "Python Engineering",
+      "category": "development",
+      "description": "Production Python development, type annotations, packaging, async programming, and pytest.",
+      "path": ".agentic/skills/python-engineering/SKILL.md"
+    },
+    "react-typescript": {
+      "name": "React Typescript",
+      "category": "development",
+      "description": "Web client application development using React 18+, TypeScript, functional components, and hooks.",
+      "path": ".agentic/skills/react-typescript/SKILL.md"
+    },
+    "requirements-engineering": {
+      "name": "Requirements Engineering",
+      "category": "product",
+      "description": "Systematic elicitating, analyzing, specifying, and validating software requirements.",
+      "path": ".agentic/skills/requirements-engineering/SKILL.md"
+    },
+    "software-architecture": {
+      "name": "Software Architecture",
+      "category": "architecture",
+      "description": "High-level software design, modular decomposition, trade-off analysis, and ADR governance.",
+      "path": ".agentic/skills/software-architecture/SKILL.md"
+    },
+    "software-migration": {
+      "name": "Software Migration",
+      "category": "architecture",
+      "description": "Database migrations, framework upgrades, language migrations, and backward-compatible data evolution.",
+      "path": ".agentic/skills/software-migration/SKILL.md"
+    },
+    "solid-principles": {
+      "name": "Solid Principles",
+      "category": "architecture",
+      "description": "Application of the five fundamental object-oriented design principles in modern software development.",
+      "path": ".agentic/skills/solid-principles/SKILL.md"
+    },
+    "testing-qa": {
+      "name": "Testing Qa",
+      "category": "quality",
+      "description": "Comprehensive testing pyramid strategy: unit, integration, contract, mutation, and E2E testing.",
+      "path": ".agentic/skills/testing-qa/SKILL.md"
+    },
+    "trd-engineering": {
+      "name": "Trd Engineering",
+      "category": "product",
+      "description": "Authoring Technical Requirements Documents with 100% PRD traceability and architectural specifications.",
+      "path": ".agentic/skills/trd-engineering/SKILL.md"
+    },
+    "web-engineering": {
+      "name": "Web Engineering",
+      "category": "architecture",
+      "description": "Modern web platform standards, Core Web Vitals, SSR/SSG architectures, and browser performance.",
+      "path": ".agentic/skills/web-engineering/SKILL.md"
+    }
+  }
+}

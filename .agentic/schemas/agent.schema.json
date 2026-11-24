@@ -1,0 +1,125 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AgentDefinition",
+  "description": "Canonical schema for an Agentic Software Factory V4 specialist agent",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "role",
+    "division",
+    "identity",
+    "mission",
+    "responsibilities",
+    "required_skills",
+    "input_contract",
+    "output_contract",
+    "allowed_operations",
+    "forbidden_operations",
+    "collaboration_rules",
+    "quality_requirements",
+    "error_handling",
+    "escalation_rules",
+    "model_tier"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_-]+$"
+    },
+    "name": {
+      "type": "string"
+    },
+    "role": {
+      "type": "string"
+    },
+    "division": {
+      "type": "string",
+      "enum": [
+        "management",
+        "product",
+        "architecture",
+        "development",
+        "quality",
+        "infrastructure",
+        "intelligence"
+      ]
+    },
+    "identity": {
+      "type": "string"
+    },
+    "mission": {
+      "type": "string"
+    },
+    "responsibilities": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "required_skills": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "input_contract": {
+      "type": "object",
+      "required": ["expected_artifacts", "preconditions"],
+      "properties": {
+        "expected_artifacts": { "type": "array", "items": { "type": "string" } },
+        "preconditions": { "type": "array", "items": { "type": "string" } },
+        "parameters": { "type": "object" }
+      }
+    },
+    "output_contract": {
+      "type": "object",
+      "required": ["deliverables", "verification_evidence"],
+      "properties": {
+        "deliverables": { "type": "array", "items": { "type": "string" } },
+        "verification_evidence": { "type": "array", "items": { "type": "string" } },
+        "state_update": { "type": "string" }
+      }
+    },
+    "allowed_operations": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "forbidden_operations": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "collaboration_rules": {
+      "type": "object",
+      "required": ["receives_tasks_from", "delegates_to", "handoff_protocol"],
+      "properties": {
+        "receives_tasks_from": { "type": "array", "items": { "type": "string" } },
+        "delegates_to": { "type": "array", "items": { "type": "string" } },
+        "handoff_protocol": { "type": "string" }
+      }
+    },
+    "quality_requirements": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "error_handling": {
+      "type": "object",
+      "required": ["retry_strategy", "max_local_retries", "failure_fallback"],
+      "properties": {
+        "retry_strategy": { "type": "string" },
+        "max_local_retries": { "type": "integer", "minimum": 0, "maximum": 5 },
+        "failure_fallback": { "type": "string" }
+      }
+    },
+    "escalation_rules": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "model_tier": {
+      "type": "string",
+      "enum": ["tier_reasoning", "tier_standard", "tier_fast"]
+    }
+  },
+  "additionalProperties": false
+}

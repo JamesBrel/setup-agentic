@@ -1,0 +1,48 @@
+# ==========================================
+# GITIGNORE - SETUP AGENTIQUE PROFESSIONNEL
+# ==========================================
+
+# IDE & Editeurs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Environnements virtuels et dépendances (selon la stack qui sera choisie dans app/)
+node_modules/
+.npm/
+vendor/
+.venv/
+env/
+__pycache__/
+*.pyc
+
+# Builds et artefacts compilés (app/)
+app/build/
+app/dist/
+app/out/
+app/target/
+app/.dart_tool/
+app/.flutter-plugins
+app/.flutter-plugins-dependencies
+
+# Logs et runtime
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Fichiers sensibles et clés d'API (toujours à ignorer)
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+secrets.json
+
+# Conserver les dossiers vides d'accueil
+!app/.gitkeep
+!docs/.gitkeep

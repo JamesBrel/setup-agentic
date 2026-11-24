@@ -1,0 +1,60 @@
+{
+  "project_id": "PROJECT-ONBOARDED",
+  "project_name": "project-name-2",
+  "scanned_at": "2026-11-16T03:04:36.912842+00:00",
+  "languages_and_runtimes": [
+    {
+      "language": "Dart",
+      "version_detected": "auto"
+    }
+  ],
+  "frameworks": [
+    "Flutter"
+  ],
+  "dependency_manifests": [],
+  "architectural_patterns": [
+    "Clean Architecture",
+    "Feature-Driven"
+  ],
+  "entry_points": [
+    "Unspecified / Library"
+  ],
+  "module_map": [
+    {
+      "module_name": "core",
+      "path": "lib/",
+      "dependencies": []
+    }
+  ],
+  "database_schema_and_migrations": {
+    "db_type": "SQLite / Drift",
+    "migration_dir": "migrations/",
+    "migration_count": 0
+  },
+  "api_contracts": [
+    "docs/openapi.yaml"
+  ],
+  "testing_infrastructure": {
+    "test_runner": "flutter test",
+    "test_command": "flutter test",
+    "existing_test_files_count": 0
+  },
+  "documentation_inventory": [
+    "README.md"
+  ],
+  "git_status_and_user_diff": {
+    "clean_worktree": true,
+    "user_modified_files": [],
+    "head_commit": "GIT_UNAVAILABLE_Command ['git', 'status', '--porcelain'] returned non-zero exit status 128."
+  },
+  "baseline_test_and_build_results": {
+    "build_passed": true,
+    "tests_passed": true,
+    "summary": "Repository scan completed. Ready for targeted operations."
+  },
+  "constraints_and_invariants": [
+    "Never overwrite user uncommitted work",
+    "Preserve existing naming conventions and formatting",
+    "Do not restructure without prior architectural review"
+  ]
+}

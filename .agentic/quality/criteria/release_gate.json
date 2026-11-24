@@ -1,0 +1,40 @@
+{
+  "gate_id": "GATE-REL-005",
+  "name": "Release & Delivery Gate",
+  "stage": "RELEASE_PREPARATION",
+  "description": "Final gate certifying all preceding gates, E2E journeys, changelog, and packaging.",
+  "enforcing_agents": ["release-manager", "e2e-testing", "documentation-engineer"],
+  "blocking": true,
+  "checks": [
+    {
+      "check_id": "REL-CHK-01",
+      "name": "Preceding Quality Gates Verified",
+      "category": "BUILD_VERIFICATION",
+      "evaluation_method": "EVIDENCE_LOG_CHECK",
+      "required_result": "GATES 1, 2, 3, 4 ALL SIGNED OFF"
+    },
+    {
+      "check_id": "REL-CHK-02",
+      "name": "End-to-End User Journey Pass",
+      "category": "E2E_TESTING",
+      "evaluation_method": "CLI_E2E",
+      "required_result": "100% PASS"
+    },
+    {
+      "check_id": "REL-CHK-03",
+      "name": "Changelog and Documentation Synchronized",
+      "category": "DOCUMENTATION_VERIFICATION",
+      "evaluation_method": "ARTIFACT_INSPECTION",
+      "required_result": "CHANGELOG.md and docs synchronized"
+    },
+    {
+      "check_id": "REL-CHK-04",
+      "name": "Human-in-the-Loop Release Signoff",
+      "category": "BUILD_VERIFICATION",
+      "evaluation_method": "HUMAN_APPROVAL_CHECK",
+      "required_result": "SIGN_OFF_CONFIRMED"
+    }
+  ],
+  "pass_criteria": "All integration tests pass, documentation current, human approval logged.",
+  "failure_action": "BLOCK_WORKFLOW"
+}

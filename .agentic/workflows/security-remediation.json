@@ -1,0 +1,80 @@
+{
+  "id": "security-remediation",
+  "name": "Security Vulnerability Remediation",
+  "description": "Urgent patching of SAST, SCA, or secret leak findings to meet GATE-SEC-004 standards.",
+  "operating_mode": "HYBRID",
+  "trigger_conditions": [
+    "GATE-SEC-004 failure",
+    "Command: /security-audit or !security-audit"
+  ],
+  "required_agents": [
+    "security-auditor",
+    "security-architect",
+    "backend-developer",
+    "unit-testing"
+  ],
+  "input_artifacts": [
+    ".agentic/logs/security_findings.json"
+  ],
+  "execution_stages": [
+    {
+      "stage_id": "SEC-01-TRIAGE",
+      "name": "Vulnerability Triage & Exploitability Analysis",
+      "order": 1,
+      "agent": "security-architect",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        ".agentic/logs/security_findings.json"
+      ],
+      "outputs": [
+        "docs/SECURITY_REMEDIATION_PLAN.md"
+      ],
+      "quality_gate_id": null
+    },
+    {
+      "stage_id": "SEC-02-PATCH",
+      "name": "Security Patch Implementation",
+      "order": 2,
+      "agent": "backend-developer",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        "docs/SECURITY_REMEDIATION_PLAN.md"
+      ],
+      "outputs": [
+        "src/"
+      ],
+      "quality_gate_id": null
+    },
+    {
+      "stage_id": "SEC-03-RETEST",
+      "name": "SAST & Exploit Verification Rescan",
+      "order": 3,
+      "agent": "security-auditor",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        "src/"
+      ],
+      "outputs": [
+        "docs/SECURITY_AUDIT.md"
+      ],
+      "quality_gate_id": "GATE-SEC-004"
+    }
+  ],
+  "quality_gates": [
+    "GATE-SEC-004"
+  ],
+  "failure_handling": {
+    "retry_limit": 2,
+    "fallback_action": "ESCALATE_TO_SECURITY_ARCHITECT",
+    "escalation_target": "chief-orchestrator"
+  },
+  "completion_criteria": [
+    "Zero Critical or High severity vulnerabilities remaining",
+    "GATE-SEC-004 passes green",
+    "Regression tests confirm application functionality preserved"
+  ],
+  "expected_deliverables": [
+    "docs/SECURITY_AUDIT.md",
+    "Patched source code"
+  ]
+}

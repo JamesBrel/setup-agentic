@@ -1,0 +1,345 @@
+{
+  "id": "new-project-creation",
+  "name": "New Project Creation (Mode A Greenfield)",
+  "description": "End-to-end 20-stage engineering lifecycle for creating a new software product from conception to release.",
+  "operating_mode": "GREENFIELD",
+  "trigger_conditions": [
+    "User requests greenfield software creation from scratch",
+    "Command: /new-project or !new-project",
+    "CLI invocation: run_workflow.py --workflow new-project-creation"
+  ],
+  "required_agents": [
+    "chief-orchestrator",
+    "product-strategist",
+    "business-analyst",
+    "requirements-engineer",
+    "prd-architect",
+    "trd-architect",
+    "principal-software-architect",
+    "database-architect",
+    "api-architect",
+    "ui-ux-designer",
+    "task-planning",
+    "agent-coordination",
+    "frontend-developer",
+    "backend-developer",
+    "database-engineer",
+    "integration-engineer",
+    "unit-testing",
+    "qa-engineer",
+    "security-auditor",
+    "performance-engineer",
+    "documentation-engineer",
+    "release-manager"
+  ],
+  "input_artifacts": [
+    "user_initial_brief"
+  ],
+  "execution_stages": [
+    {
+      "stage_id": "STAGE-01-DISCOVERY",
+      "name": "Idea Discovery and Product Vision",
+      "order": 1,
+      "agent": "product-strategist",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        "user_initial_brief"
+      ],
+      "outputs": [
+        "product_vision.md"
+      ],
+      "quality_gate_id": null
+    },
+    {
+      "stage_id": "STAGE-02-BUSINESS-ANALYSIS",
+      "name": "Business Process & Persona Modeling",
+      "order": 2,
+      "agent": "business-analyst",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        "product_vision.md"
+      ],
+      "outputs": [
+        "business_analysis.md"
+      ],
+      "quality_gate_id": null
+    },
+    {
+      "stage_id": "STAGE-03-REQUIREMENTS",
+      "name": "Requirements Elicitation and Acceptance Criteria",
+      "order": 3,
+      "agent": "requirements-engineer",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        "business_analysis.md"
+      ],
+      "outputs": [
+        "requirements_matrix.json"
+      ],
+      "quality_gate_id": null
+    },
+    {
+      "stage_id": "STAGE-04-PRD-GENERATION",
+      "name": "PRD Authoring and Formalization",
+      "order": 4,
+      "agent": "prd-architect",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        "requirements_matrix.json",
+        "product_vision.md"
+      ],
+      "outputs": [
+        "docs/PRD.md",
+        ".agentic/memory/prd.json"
+      ],
+      "quality_gate_id": "GATE-REQ-001"
+    },
+    {
+      "stage_id": "STAGE-05-TECHNICAL-RESEARCH",
+      "name": "Technology Stack Research & Benchmarks",
+      "order": 5,
+      "agent": "technical-research",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        ".agentic/memory/prd.json"
+      ],
+      "outputs": [
+        "docs/TECH_EVALUATION.md"
+      ],
+      "quality_gate_id": null
+    },
+    {
+      "stage_id": "STAGE-06-TRD-ARCHITECTURE",
+      "name": "TRD Authoring and Traceability Mapping",
+      "order": 6,
+      "agent": "trd-architect",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        ".agentic/memory/prd.json",
+        "docs/TECH_EVALUATION.md"
+      ],
+      "outputs": [
+        "docs/TRD.md",
+        ".agentic/memory/trd.json"
+      ],
+      "quality_gate_id": "GATE-ARCH-002"
+    },
+    {
+      "stage_id": "STAGE-07-DATABASE-API-DESIGN",
+      "name": "Database Schema and API Contract Design",
+      "order": 7,
+      "agent": "database-architect",
+      "execution_mode": "PARALLEL",
+      "parallel_group": "DESIGN_SLICE",
+      "inputs": [
+        ".agentic/memory/trd.json"
+      ],
+      "outputs": [
+        "docs/DATABASE_SCHEMA.md",
+        "docs/openapi.yaml"
+      ],
+      "quality_gate_id": null
+    },
+    {
+      "stage_id": "STAGE-08-UIUX-SPEC",
+      "name": "UI/UX Tokens and User Journey Specifications",
+      "order": 8,
+      "agent": "ui-ux-designer",
+      "execution_mode": "PARALLEL",
+      "parallel_group": "DESIGN_SLICE",
+      "inputs": [
+        "docs/PRD.md"
+      ],
+      "outputs": [
+        "docs/UI_UX_SPECIFICATION.md",
+        "design/tokens.json"
+      ],
+      "quality_gate_id": null
+    },
+    {
+      "stage_id": "STAGE-09-TASK-PLANNING",
+      "name": "Task Decomposition and DAG Compilation",
+      "order": 9,
+      "agent": "task-planning",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        ".agentic/memory/trd.json",
+        "docs/DATABASE_SCHEMA.md",
+        "docs/openapi.yaml"
+      ],
+      "outputs": [
+        ".agentic/orchestration/task_dag.json"
+      ],
+      "quality_gate_id": null
+    },
+    {
+      "stage_id": "STAGE-10-DATABASE-SCAFFOLD",
+      "name": "Database Migration Implementation",
+      "order": 10,
+      "agent": "database-engineer",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        "docs/DATABASE_SCHEMA.md"
+      ],
+      "outputs": [
+        "migrations/",
+        "seeds/"
+      ],
+      "quality_gate_id": null
+    },
+    {
+      "stage_id": "STAGE-11-BACKEND-DEV",
+      "name": "Backend Services & API Implementation",
+      "order": 11,
+      "agent": "backend-developer",
+      "execution_mode": "PARALLEL",
+      "parallel_group": "DEV_SLICE",
+      "inputs": [
+        "docs/BACKEND_SPEC.md",
+        "docs/openapi.yaml",
+        "migrations/"
+      ],
+      "outputs": [
+        "src/domain/",
+        "src/infrastructure/",
+        "src/interfaces/"
+      ],
+      "quality_gate_id": null
+    },
+    {
+      "stage_id": "STAGE-12-FRONTEND-DEV",
+      "name": "Frontend Web / Mobile Implementation",
+      "order": 12,
+      "agent": "frontend-developer",
+      "execution_mode": "PARALLEL",
+      "parallel_group": "DEV_SLICE",
+      "inputs": [
+        "docs/FRONTEND_SPEC.md",
+        "design/tokens.json",
+        "docs/openapi.yaml"
+      ],
+      "outputs": [
+        "src/components/",
+        "src/pages/"
+      ],
+      "quality_gate_id": null
+    },
+    {
+      "stage_id": "STAGE-13-INTEGRATION",
+      "name": "Subsystem Wiring and Adapter Binding",
+      "order": 13,
+      "agent": "integration-engineer",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        "src/"
+      ],
+      "outputs": [
+        "src/integrations/"
+      ],
+      "quality_gate_id": null
+    },
+    {
+      "stage_id": "STAGE-14-UNIT-TESTING",
+      "name": "Unit and Mock Test Execution",
+      "order": 14,
+      "agent": "unit-testing",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        "src/"
+      ],
+      "outputs": [
+        "tests/unit/",
+        ".agentic/logs/unit_tests.log"
+      ],
+      "quality_gate_id": "GATE-CODE-003"
+    },
+    {
+      "stage_id": "STAGE-15-SECURITY-AUDIT",
+      "name": "SAST, Vulnerability Scan and Secret Audit",
+      "order": 15,
+      "agent": "security-auditor",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        "src/",
+        "package.json"
+      ],
+      "outputs": [
+        "docs/SECURITY_AUDIT.md",
+        ".agentic/logs/security_findings.json"
+      ],
+      "quality_gate_id": "GATE-SEC-004"
+    },
+    {
+      "stage_id": "STAGE-16-PERFORMANCE-TEST",
+      "name": "Performance and Latency Profiling",
+      "order": 16,
+      "agent": "performance-engineer",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        "src/"
+      ],
+      "outputs": [
+        "docs/PERFORMANCE_REPORT.md"
+      ],
+      "quality_gate_id": null
+    },
+    {
+      "stage_id": "STAGE-17-DOCUMENTATION",
+      "name": "Developer Guides and Synchronized API Docs",
+      "order": 17,
+      "agent": "documentation-engineer",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        "src/",
+        "docs/PRD.md",
+        "docs/TRD.md"
+      ],
+      "outputs": [
+        "README.md",
+        "docs/DEVELOPER_GUIDE.md"
+      ],
+      "quality_gate_id": null
+    },
+    {
+      "stage_id": "STAGE-18-RELEASE-PREPARATION",
+      "name": "Release Packaging, SemVer and Final Signoff",
+      "order": 18,
+      "agent": "release-manager",
+      "execution_mode": "SEQUENTIAL",
+      "inputs": [
+        ".agentic/logs/"
+      ],
+      "outputs": [
+        "CHANGELOG.md",
+        "release_manifest.json"
+      ],
+      "quality_gate_id": "GATE-REL-005"
+    }
+  ],
+  "quality_gates": [
+    "GATE-REQ-001",
+    "GATE-ARCH-002",
+    "GATE-CODE-003",
+    "GATE-SEC-004",
+    "GATE-REL-005"
+  ],
+  "failure_handling": {
+    "retry_limit": 3,
+    "fallback_action": "RETRY_STAGE_WITH_ROOT_CAUSE_ANALYSIS",
+    "escalation_target": "chief-orchestrator"
+  },
+  "completion_criteria": [
+    "All 18 execution stages pass without error",
+    "All 5 Quality Gates signed off with verifiable evidence",
+    "Release package generated and checksummed"
+  ],
+  "expected_deliverables": [
+    "docs/PRD.md",
+    "docs/TRD.md",
+    "src/",
+    "tests/",
+    "docs/SECURITY_AUDIT.md",
+    "CHANGELOG.md",
+    "release_manifest.json"
+  ]
+}

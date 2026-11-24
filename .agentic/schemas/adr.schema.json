@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ArchitectureDecisionRecord",
+  "description": "Canonical schema for an Agentic Software Factory V3 ADR",
+  "type": "object",
+  "required": [
+    "adr_id",
+    "title",
+    "status",
+    "date",
+    "deciders",
+    "context_and_problem",
+    "decision_drivers",
+    "considered_options",
+    "decision_outcome",
+    "consequences",
+    "validation"
+  ],
+  "properties": {
+    "adr_id": { "type": "string", "pattern": "^ADR-[0-9]{3,}$" },
+    "title": { "type": "string" },
+    "status": { "type": "string", "enum": ["PROPOSED", "ACCEPTED", "REJECTED", "DEPRECATED", "SUPERSEDED"] },
+    "date": { "type": "string" },
+    "deciders": { "type": "array", "items": { "type": "string" } },
+    "context_and_problem": { "type": "string" },
+    "decision_drivers": { "type": "array", "items": { "type": "string" } },
+    "considered_options": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["option", "pros", "cons"],
+        "properties": {
+          "option": { "type": "string" },
+          "pros": { "type": "array", "items": { "type": "string" } },
+          "cons": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "decision_outcome": { "type": "string" },
+    "consequences": {
+      "type": "object",
+      "required": ["positive", "negative", "risks"],
+      "properties": {
+        "positive": { "type": "array", "items": { "type": "string" } },
+        "negative": { "type": "array", "items": { "type": "string" } },
+        "risks": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "validation": { "type": "string" }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,40 @@
+{
+  "gate_id": "GATE-CODE-003",
+  "name": "Code Quality & Unit Testing Gate",
+  "stage": "IMPLEMENTATION",
+  "description": "Verifies build compilation, static analysis, unit test pass rate, and code reviewer signoff.",
+  "enforcing_agents": ["unit-testing", "code-reviewer", "qa-engineer"],
+  "blocking": true,
+  "checks": [
+    {
+      "check_id": "CODE-CHK-01",
+      "name": "Compilation & Build Verification",
+      "category": "BUILD_VERIFICATION",
+      "evaluation_method": "CLI_BUILD",
+      "required_result": "EXIT_CODE_0"
+    },
+    {
+      "check_id": "CODE-CHK-02",
+      "name": "Unit Test Suite Execution",
+      "category": "UNIT_TESTING",
+      "evaluation_method": "CLI_TEST",
+      "required_result": "100% PASS"
+    },
+    {
+      "check_id": "CODE-CHK-03",
+      "name": "Static Analysis & Linting",
+      "category": "STATIC_ANALYSIS",
+      "evaluation_method": "CLI_LINT",
+      "required_result": "0 ERRORS"
+    },
+    {
+      "check_id": "CODE-CHK-04",
+      "name": "Code Reviewer Approval",
+      "category": "ARCHITECTURE_VALIDATION",
+      "evaluation_method": "ARTIFACT_INSPECTION",
+      "required_result": "APPROVED"
+    }
+  ],
+  "pass_criteria": "Zero compile errors, 100% unit tests pass, and code review approved.",
+  "failure_action": "RETRY_LOCAL"
+}
